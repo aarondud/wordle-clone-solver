@@ -2,13 +2,19 @@
 ___author___ = "https://github.com/aarondud"
 
 import random
+import enum
 import sys
 from words_five_letters import five_letter_words
 
 
+class Hint(enum.Enum):
+    """ Hint class - colours correspond to correctness of guess"""
+    GREY = 0        # letter not in secret word
+    YELLOW = 1      # letter in secret word, but at incorrect index
+    GREEN = 2       # letter in word ad in correct index
+
 class Wordle:
     MAX_ATTEMPTS = 6
-    GREY, YELLOW, GREEN = 0, 1, 2  # used to evaluate the correctness of player's guessed letters by index and value
 
     def __init__(self):
         self.words = five_letter_words  # list of valid words
@@ -53,14 +59,14 @@ class Wordle:
         :return: (list) correlates to the correctness of each letter at each index (GREY, YELLOW, GREEN)
         """
         if self.valid_guess(guess):
-            guess_colour_code = [self.GREY] * 5
+            guess_colour_code = [Hint.GREY] * 5
 
             for i in range(len(self.get_secret_word())):
                 if guess[i] in self.get_secret_word():
                     if guess[i] == self.get_secret_word()[i]:
-                        guess_colour_code[i] = self.GREEN
+                        guess_colour_code[i] = Hint.GREEN
                     else:
-                        guess_colour_code[i] = self.YELLOW
+                        guess_colour_code[i] = Hint.YELLOW
 
             self.end_of_guess(guess_colour_code)
             print(guess_colour_code)
@@ -74,7 +80,7 @@ class Wordle:
         :param guess: (str) player's guess
         """
         self.inc_no_guesses(1)
-        if guess_colour_code == [self.GREEN] * 5:
+        if guess_colour_code == [Hint.GREEN] * 5:
             self.player_wins()
         elif self.get_no_guesses() >= self.MAX_ATTEMPTS:
             self.player_loses()
