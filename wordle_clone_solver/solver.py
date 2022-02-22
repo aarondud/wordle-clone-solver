@@ -2,7 +2,6 @@
 ___author___ = "https://github.com/aarondud"
 
 from words_five_letters import five_letter_words
-
 from wordle import Hint
 
 
