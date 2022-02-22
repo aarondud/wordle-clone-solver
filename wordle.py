@@ -1,8 +1,4 @@
-"""
-Simple implementation of New York Times' Wordle game
-
-Defines Wordle Class
-"""
+""" Wordle Class """
 ___author___ = "https://github.com/aarondud"
 
 import random
@@ -23,7 +19,7 @@ class Wordle:
                                 [" ", " ", " ", " ", " "],
                                 [" ", " ", " ", " ", " "],
                                 [" ", " ", " ", " ", " "],
-                                [" ", " ", " ", " ", " "]]  # can add functionality so past guesses are stored in list
+                                [" ", " ", " ", " ", " "]]
 
     def select_random_word(self) -> str:
         """
@@ -31,7 +27,7 @@ class Wordle:
         :return: (str) secret Wordle word
         """
         secret = random.choice(self.words).lower()
-        print(secret)
+        print("Secret word: " + str(secret))
         return secret
 
     def valid_guess(self, guess: str) -> bool:
@@ -59,9 +55,9 @@ class Wordle:
         if self.valid_guess(guess):
             guess_colour_code = [self.GREY] * 5
 
-            for i in range(len(self.secret_word)):
-                if guess[i] in self.secret_word:
-                    if guess[i] == self.secret_word[i]:
+            for i in range(len(self.get_secret_word())):
+                if guess[i] in self.get_secret_word():
+                    if guess[i] == self.get_secret_word()[i]:
                         guess_colour_code[i] = self.GREEN
                     else:
                         guess_colour_code[i] = self.YELLOW
@@ -80,7 +76,7 @@ class Wordle:
         self.inc_no_guesses(1)
         if guess_colour_code == [self.GREEN] * 5:
             self.player_wins()
-        elif self.no_guesses >= self.MAX_ATTEMPTS:
+        elif self.get_no_guesses() >= self.MAX_ATTEMPTS:
             self.player_loses()
 
     def get_player_guess(self) -> None:
@@ -91,11 +87,8 @@ class Wordle:
 
         while not valid_guess:
             guess = input("Enter valid 5 letter word: ").lower()
-
             if self.valid_guess(guess):
-
-                self.player_attempts[self.no_guesses]= self.string_to_list(guess)
-
+                self.get_player_attempts()[self.get_no_guesses()] = self.string_to_list(guess)
                 break
             else:
                 print("Invalid - try again\n")
@@ -104,21 +97,27 @@ class Wordle:
         """
         When player wins, display winning message and end game
         """
-        print("Player wins! The word was -" + str(self.secret_word) + "-")
+        print("Player wins! The word was -" + str(self.get_secret_word()) + "-")
         sys.exit()
 
-    def player_loses(self):
+    def player_loses(self) -> None:
         """
         When player loses, display losing message and end game
         :return:
         """
-        print("Player loses. The word was -" + str(self.secret_word) + "-")
+        print("Player loses. The word was -" + str(self.get_secret_word()) + "-")
         sys.exit()
 
-    def restart(self):
+    def restart(self) -> None:
         """Restarts wordle game"""
-        # introduce functionality later
-        pass
+        self.player_attempts = [[" ", " ", " ", " ", " "],
+                                [" ", " ", " ", " ", " "],
+                                [" ", " ", " ", " ", " "],
+                                [" ", " ", " ", " ", " "],
+                                [" ", " ", " ", " ", " "],
+                                [" ", " ", " ", " ", " "]]
+        self.no_guesses = 0
+        self.secret_word = self.select_random_word()
 
     def list_to_string(self, guess_list: list) -> str:
         guess_str = ''
@@ -135,5 +134,12 @@ class Wordle:
     def get_no_guesses(self) -> int:
         return self.no_guesses
 
-    def inc_no_guesses(self, delta):
+    def get_secret_word(self) -> str:
+        return self.secret_word
+
+    def get_player_attempts(self) -> list:
+        return self.player_attempts
+
+    def inc_no_guesses(self, delta) -> None:
         self.no_guesses += delta
+
