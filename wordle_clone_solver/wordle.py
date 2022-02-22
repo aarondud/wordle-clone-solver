@@ -1,4 +1,4 @@
-""" Wordle Class """
+""" Wordle Class holds functionality for Wordle game """
 ___author___ = "https://github.com/aarondud"
 
 import random

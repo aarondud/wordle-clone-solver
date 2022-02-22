@@ -1,4 +1,4 @@
-""" Solver Class"""
+""" Solver Class - elimination based solving algorithm for Wordle clone"""
 ___author___ = "https://github.com/aarondud"
 
 from words_five_letters import five_letter_words

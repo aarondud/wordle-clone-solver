@@ -1,6 +1,4 @@
-"""
-List of five letter words
-"""
+""" List of five letter words """
 
 five_letter_words = [
     'aback',

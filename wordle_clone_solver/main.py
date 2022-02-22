@@ -1,10 +1,6 @@
-"""
-Simple clone of New York Times' Wordle game
-Implemented using pygame
-"""
+""" Simple clone of New York Times' Wordle game. GUI Implemented using pygame """
 ___author___ = "https://github.com/aarondud"
 
-# current bug - if solver cannot solve in <= guesses, window incorrectly displays winning message
 import pygame
 from wordle import Wordle, list_to_string, string_to_list
 from wordle import Hint
@@ -30,7 +26,7 @@ GREY = (58, 58, 58)
 
 
 def game_loop() -> None:
-    """ main game  """
+    """ main game loop """
 
     game = Wordle()
     solver = Solver()
@@ -100,10 +96,12 @@ def game_loop() -> None:
                 game.inc_no_guesses(1)
 
         else:
+            # not using solver
             # event handling
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+
                 if event.type == pygame.KEYDOWN:
                     if turn_active and not game_over:
                         if event.key == pygame.K_a:
@@ -188,6 +186,7 @@ def game_loop() -> None:
                     if event.key == pygame.K_BACKSPACE and letters > 0:
                         game.player_attempts[game.get_no_guesses()][letters - 1] = ""
                         letters -= 1
+
                     if event.key == pygame.K_RETURN and not game_over and letters < 5:
                         pass
                     elif event.key == pygame.K_RETURN and not game_over:
@@ -199,11 +198,11 @@ def game_loop() -> None:
                             invalid_guess = False
                         else:
                             invalid_guess = True
-
                     if event.key == pygame.K_RETURN and game_over:
                         game.restart()
                         letters = 0
                         game_over = False
+
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
                         if new_button.collidepoint(event.pos):
