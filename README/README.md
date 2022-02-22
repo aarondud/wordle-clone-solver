@@ -4,18 +4,20 @@ Developed a clone of the popular New York Times game Wordle (https://www.nytimes
 
 Written using python and the pygame library to provide the graphical user interface.
 
-# Initial State
+## Gameplay screengrabs
+
+### Initial state
 
 ![img.png](img.png)
 
-# Game in Progress
+### Game in progress
 
 ![img_3.png](img_3.png)
 
-# Completed using "SOLVE" button
+### Completed using "SOLVE" button
 
 ![img_4.png](img_4.png)
 
-# Solving Algorithm
+## Solving Algorithm
 
 Designed a simple elimination based algorithm that reduces the number of valid guesses based on the correctness of the previous guess.
