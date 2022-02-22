@@ -13,7 +13,25 @@ class Hint(enum.Enum):
     YELLOW = 1      # letter in secret word, but at incorrect index
     GREEN = 2       # letter in word ad in correct index
 
+
+def list_to_string(guess_list: list) -> str:
+    """ Swaps player's guess from list format to string format"""
+    guess_str = ''
+    for letter in guess_list:
+        guess_str += letter
+    return guess_str
+
+
+def string_to_list(guess_str) -> list:
+    """ Swaps player's guess from string format to list format"""
+    guess_list = []
+    for letter in guess_str:
+        guess_list.append(letter)
+    return guess_list
+
+
 class Wordle:
+    """ Holds functionality for Wordle game"""
     MAX_ATTEMPTS = 6
 
     def __init__(self):
@@ -77,7 +95,7 @@ class Wordle:
     def end_of_guess(self, guess_colour_code: list) -> None:
         """
         After each valid guess, increment player's no of guesses and check for win/loss
-        :param guess: (str) player's guess
+        :param guess_colour_code: (list) correctness of player's guess
         """
         self.inc_no_guesses(1)
         if guess_colour_code == [Hint.GREEN] * 5:
@@ -86,31 +104,24 @@ class Wordle:
             self.player_loses()
 
     def get_player_guess(self) -> None:
-        """
-        Record's player's guess. Loops until a valid 5 letter string is entered
-        """
+        """ Record's player's guess. Loops until a valid 5 letter string is entered """
         valid_guess = False
 
         while not valid_guess:
             guess = input("Enter valid 5 letter word: ").lower()
             if self.valid_guess(guess):
-                self.get_player_attempts()[self.get_no_guesses()] = self.string_to_list(guess)
+                self.get_player_attempts()[self.get_no_guesses()] = string_to_list(guess)
                 break
             else:
                 print("Invalid - try again\n")
 
     def player_wins(self) -> None:
-        """
-        When player wins, display winning message and end game
-        """
+        """ When player wins, display winning message and end game """
         print("Player wins! The word was -" + str(self.get_secret_word()) + "-")
         sys.exit()
 
     def player_loses(self) -> None:
-        """
-        When player loses, display losing message and end game
-        :return:
-        """
+        """ When player loses, display losing message and end game """
         print("Player loses. The word was -" + str(self.get_secret_word()) + "-")
         sys.exit()
 
@@ -125,27 +136,18 @@ class Wordle:
         self.no_guesses = 0
         self.secret_word = self.select_random_word()
 
-    def list_to_string(self, guess_list: list) -> str:
-        guess_str = ''
-        for letter in guess_list:
-            guess_str += letter
-        return guess_str
-
-    def string_to_list(self, guess_str) -> list:
-        guess_list = []
-        for letter in guess_str:
-            guess_list.append(letter)
-        return guess_list
-
     def get_no_guesses(self) -> int:
+        """ Returns the number of player's guesses"""
         return self.no_guesses
 
     def get_secret_word(self) -> str:
+        """ Returns the winning word"""
         return self.secret_word
 
     def get_player_attempts(self) -> list:
         return self.player_attempts
 
     def inc_no_guesses(self, delta) -> None:
+        """Increment number of player's guesses"""
         self.no_guesses += delta
 

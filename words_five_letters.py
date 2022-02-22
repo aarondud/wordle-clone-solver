@@ -1,5 +1,5 @@
 """
-List of five letter words - contains 3445 words
+List of five letter words
 """
 
 five_letter_words = [
@@ -14090,6 +14090,3 @@ valid_words = [
     'zymes',
     'zymic',
     ]
-
-#no_words = (len(five_letter_words))
-#print(no_words)
