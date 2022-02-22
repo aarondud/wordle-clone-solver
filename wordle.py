@@ -8,7 +8,7 @@ from words_five_letters import five_letter_words
 
 
 class Hint(enum.Enum):
-    """ Hint class - colours correspond to correctness of guess"""
+    """ Hint class - colours correspond to correctness of guess """
     GREY = 0        # letter not in secret word
     YELLOW = 1      # letter in secret word, but at incorrect index
     GREEN = 2       # letter in word ad in correct index
@@ -86,8 +86,7 @@ class Wordle:
                     else:
                         guess_colour_code[i] = Hint.YELLOW
 
-            self.end_of_guess(guess_colour_code)
-            print(guess_colour_code)
+            # self.end_of_guess(guess_colour_code) removed bcos of gui solver - required for main.py tho
             return guess_colour_code
         else:
             return None

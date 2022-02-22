@@ -5,13 +5,13 @@ No graphical interface, played in console
 ___author___ = "https://github.com/aarondud"
 
 from wordle import Wordle, list_to_string
-from solver_v2 import Solver
+from solver import Solver
 
 
 def main():
     game = Wordle()
     using_solver = True       # if using solver
-    solver = Solver(True)
+    solver = Solver()
 
     while using_solver:
         current_guess = list_to_string(solver.next_guess())
