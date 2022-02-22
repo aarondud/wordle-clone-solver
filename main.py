@@ -1,5 +1,6 @@
 """
 Simple clone of New York Times' Wordle game
+No graphical interface, played in console
 """
 ___author___ = "https://github.com/aarondud"
 
