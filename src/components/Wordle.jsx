@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import useWordle from "../hooks/useWordle";
 import Grid from "./Grid";
-import Keypad from "./Keypad";
+import Keypad from "./Keyboard";
 import Modal from "./Modal";
 
 const Wordle = ({ solution }) => {
   const maxAttempts = 6 - 1; // why 5 here not 6... depends on where we are adding attempts...
 
-  const { currentGuess, guesses, isCorrect, attemptNo, handleKeyUp } =
+  const { currentGuess, guesses, isCorrect, attemptNo, usedKeys, handleKeyUp } =
     useWordle(solution);
   const [showModal, setShowModal] = useState(false);
 
@@ -35,7 +35,7 @@ const Wordle = ({ solution }) => {
         guesses={guesses}
         attemptNo={attemptNo}
       />
-      <Keypad />
+      <Keypad usedKeys={usedKeys} />
       {showModal && (
         <Modal
           isCorrect={isCorrect}
