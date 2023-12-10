@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useWordle = (solution) => {
+const useWordle = (solution, validGuesses) => {
   const wordLength = 5;
   const maxAttempts = 6;
 
@@ -89,7 +89,8 @@ const useWordle = (solution) => {
       if (
         attemptNo < maxAttempts &&
         currentGuess.length == wordLength &&
-        !history.includes(currentGuess)
+        !history.includes(currentGuess) &&
+        validGuesses.has(currentGuess)
       ) {
         addNewGuess(formatGuess());
       }

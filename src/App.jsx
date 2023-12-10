@@ -10,15 +10,19 @@ function App() {
     const fetchWords = async () => {
       try {
         const response = await fetch(
-          "https://gist.githubusercontent.com/aarondud/b21c0fb51c921fe31bd470d2e5a86430/raw/a974c661f97128f9be6f5a12c3f4312a90314398/wordle-5letter-words.json"
+          "https://gist.githubusercontent.com/aarondud/77aaceafa65ec74ff82250f26d5e77ce/raw/623374aba869301b34d124d87207c34379a00dd5/wordle-5letter-words.txt"
         );
 
         if (!response.ok) {
           throw new Error("Network response not ok");
         }
 
-        const wordsArray = await response.json();
-        setWords(wordsArray);
+        const wordsText = await response.text();
+        const wordsArray = wordsText
+          .split("\n")
+          .filter((word) => word.trim() !== "");
+        const wordsSet = new Set(wordsArray);
+        setWords(wordsSet);
       } catch (error) {
         console.error("Error fetching words: ", error.message);
       }
@@ -27,16 +31,35 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (words) {
-      const solution = words[Math.floor(Math.random() * words.length)];
-      setSolution(solution);
-    }
-  }, [words, setSolution]);
+    const fetchWords = async () => {
+      try {
+        const response = await fetch(
+          "https://gist.githubusercontent.com/aarondud/77aaceafa65ec74ff82250f26d5e77ce/raw/623374aba869301b34d124d87207c34379a00dd5/wordle-5letter-solutions.txt"
+        );
+
+        if (!response.ok) {
+          throw new Error("Network response not ok");
+        }
+
+        const wordsText = await response.text();
+        const wordsArray = wordsText
+          .split("\n")
+          .filter((word) => word.trim() !== "");
+
+        const randomIndex = Math.floor(Math.random() * wordsArray.length);
+        const randomSolution = wordsArray[randomIndex];
+        setSolution(randomSolution);
+      } catch (error) {
+        console.error("Error fetching words: ", error.message);
+      }
+    };
+    fetchWords();
+  }, []);
 
   return (
     <div className="App">
       <h1>Wordle</h1>
-      {words && solution && <Wordle solution={solution} />}
+      {words && solution && <Wordle solution={solution} validGuesses={words} />}
     </div>
   );
 }
