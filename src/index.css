@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'NYT Karnak Condensed';
+  src: url('/fonts/KarnakPro-CondensedBlack.otf') format('opentype'),
+    url('/fonts/KarnakPro-Black.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   text-align: center;
   font-size: 1em;
@@ -6,7 +14,8 @@ body {
 }
 
 h1 {
-  font-size: 1.2em;
+  font-size: 3em;
+  font-family: 'NYT Karnak Condensed';
   padding: 20px 0;
   border-bottom: 1px solid #eee;
   margin: 0 0 30px 0;

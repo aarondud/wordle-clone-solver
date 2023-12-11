@@ -33,11 +33,9 @@ export default function Row({ guess, currentGuess }) {
 
   return (
     <div className="row">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      {Array.from({ length: wordLength }, (_, i) => (
+        <div key={i} className="letter"></div>
+      ))}
     </div>
   );
 }
