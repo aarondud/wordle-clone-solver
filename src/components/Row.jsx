@@ -1,7 +1,23 @@
+import { useEffect } from "react";
 import React from "react";
 
-export default function Row({ guess, currentGuess }) {
-  const wordLength = 5;
+export default function Row({ wordLength, guess, currentGuess, isInvalid }) {
+  // useEffect for the shake animation
+  useEffect(() => {
+    if (isInvalid) {
+      const element = document.querySelector(".row.current.invalidWord");
+      element.classList.add("shake-animation");
+
+      // Remove the shake class after the animation ends
+      const onAnimationEnd = () => {
+        element.classList.remove("shake-animation");
+        element.removeEventListener("animationend", onAnimationEnd);
+      };
+
+      // Attach event listener for animation end
+      element.addEventListener("animationend", onAnimationEnd);
+    }
+  }, [isInvalid]);
 
   if (guess) {
     return (
@@ -18,7 +34,7 @@ export default function Row({ guess, currentGuess }) {
   if (currentGuess) {
     let letters = currentGuess.split("");
     return (
-      <div className="row current">
+      <div className={`row current ${isInvalid ? "invalidWord" : ""}`}>
         {letters.map((letter, index) => (
           <div key={index} className="filled">
             {letter}
@@ -33,8 +49,8 @@ export default function Row({ guess, currentGuess }) {
 
   return (
     <div className="row">
-      {Array.from({ length: wordLength }, (_, i) => (
-        <div key={i} className="letter"></div>
+      {Array.from({ length: wordLength }, (_, index) => (
+        <div key={index} className="letter"></div>
       ))}
     </div>
   );

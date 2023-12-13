@@ -5,8 +5,15 @@ import Keypad from "./Keyboard";
 import Modal from "./Modal";
 
 const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
-  const { currentGuess, guesses, isCorrect, attemptNo, usedKeys, handleKeyUp } =
-    useWordle(solution, validGuesses, wordLength, maxAttempts);
+  const {
+    currentGuess,
+    guesses,
+    isCorrect,
+    attemptNo,
+    usedKeys,
+    handleKeyUp,
+    isInvalid,
+  } = useWordle(solution, validGuesses, wordLength, maxAttempts);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -17,7 +24,7 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
       window.removeEventListener("keyup", handleKeyUp);
     }
 
-    if (attemptNo > maxAttempts) {
+    if (attemptNo >= maxAttempts) {
       setTimeout(() => setShowModal(true), 2000);
       window.removeEventListener("keyup", handleKeyUp);
     }
@@ -32,6 +39,8 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
         currentGuess={currentGuess}
         guesses={guesses}
         attemptNo={attemptNo}
+        wordLength={wordLength}
+        isInvalid={isInvalid}
       />
       <Keypad usedKeys={usedKeys} handleKeyUp={handleKeyUp} />
       {showModal && (
