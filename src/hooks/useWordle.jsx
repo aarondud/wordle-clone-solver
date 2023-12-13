@@ -1,15 +1,13 @@
 import { useState } from "react";
 
-const useWordle = (solution, validGuesses) => {
-  const wordLength = 5;
-  const maxAttempts = 6;
-
+const useWordle = (solution, validGuesses, wordLength, maxAttempts) => {
   const [attemptNo, setAttemptNo] = useState(0);
   const [currentGuess, setCurrentGuess] = useState("");
   const [guesses, setGuesses] = useState([...Array(maxAttempts)]);
   const [history, setHistory] = useState([]);
   const [isCorrect, setIsCorrect] = useState(false);
   const [usedKeys, setUsedKeys] = useState({});
+  const [isInvalid, setIsInvalid] = useState(null);
 
   const formatGuess = () => {
     let solutionArray = [...solution];
@@ -82,10 +80,50 @@ const useWordle = (solution, validGuesses) => {
 
   const handleKeyUp = ({ key }) => {
     if (key === "Enter") {
-      // no duplicate word
-      // attempt < 5
-      // currentGuess = 5 characters
+      if (
+        attemptNo < maxAttempts &&
+        currentGuess.length == wordLength &&
+        !history.includes(currentGuess)
+      ) {
+        if (validGuesses.has(currentGuess)) {
+          setIsInvalid(false);
+          addNewGuess(formatGuess());
+        } else {
+          setIsInvalid(true);
+        }
+      }
+    }
 
+    if (key === "Backspace") {
+      setCurrentGuess((prev) => prev.slice(0, -1));
+      setIsInvalid(false);
+      return;
+    }
+
+    if (/^[A-Za-z]$/.test(key)) {
+      if (currentGuess.length < wordLength) {
+        setCurrentGuess((prev) => prev + key);
+      }
+    }
+  };
+
+  return {
+    attemptNo,
+    currentGuess,
+    guesses,
+    isCorrect,
+    usedKeys,
+    handleKeyUp,
+    isInvalid,
+  };
+};
+
+export default useWordle;
+
+/*
+BEFORE TRACKING ISINVALID
+const handleKeyUp = ({ key }) => {
+    if (key === "Enter") {
       if (
         attemptNo < maxAttempts &&
         currentGuess.length == wordLength &&
@@ -107,8 +145,4 @@ const useWordle = (solution, validGuesses) => {
       }
     }
   };
-
-  return { attemptNo, currentGuess, guesses, isCorrect, usedKeys, handleKeyUp };
-};
-
-export default useWordle;
+  */
