@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import React from "react";
+import Tile from "./Tile.jsx";
 
 export default function Row({ wordLength, guess, currentGuess, isInvalid }) {
   // useEffect for the shake animation
@@ -23,9 +24,7 @@ export default function Row({ wordLength, guess, currentGuess, isInvalid }) {
     return (
       <div className="row past">
         {guess.map((letter, index) => (
-          <div key={index} className={letter.color}>
-            {letter.key}
-          </div>
+          <Tile key={index} color={letter.color} letter={letter.key} />
         ))}
       </div>
     );
@@ -36,12 +35,16 @@ export default function Row({ wordLength, guess, currentGuess, isInvalid }) {
     return (
       <div className={`row current ${isInvalid ? "invalidWord" : ""}`}>
         {letters.map((letter, index) => (
-          <div key={index} className="filled">
-            {letter}
-          </div>
+          <Tile
+            key={index}
+            letter={letter}
+            color={letter.color}
+            filled
+            isCurrent
+          />
         ))}
         {[...Array(wordLength - letters.length)].map((_, index) => (
-          <div key={index}></div>
+          <Tile key={index} />
         ))}
       </div>
     );
@@ -50,7 +53,7 @@ export default function Row({ wordLength, guess, currentGuess, isInvalid }) {
   return (
     <div className="row">
       {Array.from({ length: wordLength }, (_, index) => (
-        <div key={index} className="letter"></div>
+        <Tile key={index} />
       ))}
     </div>
   );
