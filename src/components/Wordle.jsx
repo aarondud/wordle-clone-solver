@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useWordle from "../hooks/useWordle";
 import Grid from "./Grid";
-import Keypad from "./Keyboard";
+import Keyboard from "./Keyboard";
 import Modal from "./Modal";
 
 const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
@@ -42,7 +42,7 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
         wordLength={wordLength}
         isInvalid={isInvalid}
       />
-      <Keypad usedKeys={usedKeys} handleKeyUp={handleKeyUp} />
+      <Keyboard usedKeys={usedKeys} handleKeyUp={handleKeyUp} />
       {showModal && (
         <Modal
           isCorrect={isCorrect}

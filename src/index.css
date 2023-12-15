@@ -124,13 +124,13 @@ not currently used
   animation: shake 0.6s ease-in-out forwards;
 }
 
-/* Keypad styles */
-.keypad {
+/* Keyboard styles */
+.keyboard {
   max-width: 500px;
   margin: 20px auto;
 }
 
-.keypad>div {
+.key {
   margin: 5px;
   width: 40px;
   height: 50px;
@@ -140,23 +140,23 @@ not currently used
   line-height: 50px;
 }
 
-#big {
+.key.big {
   width: 65px;
 }
 
-.keypad>div.green {
+.key.green {
   background: var(--green-color);
   color: var(--keyboard-text-light);
   transition: all 0.3s ease-in;
 }
 
-.keypad>div.yellow {
+.key.yellow {
   background: var(--yellow-color);
   color: var(--keyboard-text-light);
   transition: all 0.3s ease-in;
 }
 
-.keypad>div.grey {
+.key.grey {
   background: var(--grey-color);
   color: var(--keyboard-text-light);
   transition: all 0.3s ease-in;
@@ -299,4 +299,8 @@ h1.dark {
   80% {
     transform: translateX(6px);
   }
+}
+
+.hover-clickable {
+  cursor: pointer;
 }

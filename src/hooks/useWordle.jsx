@@ -94,7 +94,7 @@ const useWordle = (solution, validGuesses, wordLength, maxAttempts) => {
       }
     }
 
-    if (key === "Backspace") {
+    if (key === "Backspace" || key === "⌫") {
       setCurrentGuess((prev) => prev.slice(0, -1));
       setIsInvalid(false);
       return;
