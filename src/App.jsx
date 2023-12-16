@@ -1,65 +1,56 @@
 import "./App.css";
 import Wordle from "./components/Wordle.jsx";
+import Navbar from "./components/Navbar.jsx";
 import { useEffect, useState } from "react";
+import { fetchData } from "./utils/dataFetcher.js";
 
 function App() {
   const [words, setWords] = useState(null);
   const [solution, setSolution] = useState(null);
+  const [gameMode, setGameMode] = useState("Wordle");
+  const [wordLength, setWordLength] = useState(5);
+  const [maxAttempts, setMaxAttempts] = useState(6);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    const fetchWords = async () => {
-      try {
-        const response = await fetch(
-          "https://gist.githubusercontent.com/aarondud/77aaceafa65ec74ff82250f26d5e77ce/raw/623374aba869301b34d124d87207c34379a00dd5/wordle-5letter-words.txt"
-        );
-
-        if (!response.ok) {
-          throw new Error("Network response not ok");
-        }
-
-        const wordsText = await response.text();
-        const wordsArray = wordsText
-          .split("\n")
-          .filter((word) => word.trim() !== "");
-        const wordsSet = new Set(wordsArray);
-        setWords(wordsSet);
-      } catch (error) {
-        console.error("Error fetching words: ", error.message);
+    fetchData(gameMode).then((data) => {
+      if (data) {
+        setWords(data.words);
+        setSolution(data.solution);
       }
-    };
-    fetchWords();
-  }, []);
+    });
+  }, [gameMode]);
 
-  useEffect(() => {
-    const fetchWords = async () => {
-      try {
-        const response = await fetch(
-          "https://gist.githubusercontent.com/aarondud/77aaceafa65ec74ff82250f26d5e77ce/raw/623374aba869301b34d124d87207c34379a00dd5/wordle-5letter-solutions.txt"
-        );
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => !prevMode);
+  };
 
-        if (!response.ok) {
-          throw new Error("Network response not ok");
-        }
+  const toggleGameMode = () => {
+    setGameMode((prevMode) => (prevMode === "Wordle" ? "Wordle+" : "Wordle"));
+    setWordLength((prevMode) => (prevMode === 5 ? 6 : 5));
+    setMaxAttempts((prevMode) => (prevMode === 6 ? 7 : 6));
+  };
 
-        const wordsText = await response.text();
-        const wordsArray = wordsText
-          .split("\n")
-          .filter((word) => word.trim() !== "");
-
-        const randomIndex = Math.floor(Math.random() * wordsArray.length);
-        const randomSolution = wordsArray[randomIndex];
-        setSolution(randomSolution);
-      } catch (error) {
-        console.error("Error fetching words: ", error.message);
-      }
-    };
-    fetchWords();
-  }, []);
+  const toggleInfo = () => {};
 
   return (
     <div className="App">
-      <h1>Aaron's Wordle</h1>
-      {words && solution && <Wordle solution={solution} validGuesses={words} />}
+      <Navbar
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        gameMode={gameMode}
+        toggleGameMode={toggleGameMode}
+        toggleInfo={toggleInfo}
+      />
+      {words && solution && (
+        <Wordle
+          className={darkMode ? "dark" : ""}
+          solution={solution}
+          validGuesses={words}
+          wordLength={wordLength}
+          maxAttempts={maxAttempts}
+        />
+      )}
     </div>
   );
 }
