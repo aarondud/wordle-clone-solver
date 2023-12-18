@@ -20,7 +20,7 @@ export default function Keyboard({ usedKeys, handleKeyUp }) {
     ));
 
   return (
-    <div className="keyboard" style={{ userSelect: "none" }}>
+    <div className="keyboard">
       {keyboardLayout.map((row, rowIndex) => renderRow(row, rowIndex))}
     </div>
   );

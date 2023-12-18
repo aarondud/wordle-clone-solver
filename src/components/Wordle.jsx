@@ -20,12 +20,19 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
     window.addEventListener("keyup", handleKeyUp);
 
     if (isCorrect) {
-      setTimeout(() => setShowModal(true), 2000);
+      const rowElements = document.querySelectorAll(".row.past");
+      const winningRow = Array.from(rowElements).pop();
+      const tiles = Array.from(winningRow.querySelectorAll(".tile"));
+      setTimeout(() => {
+        tiles.map((tileElement) => tileElement.classList.add("waterfall")); // Add waterfall animation after delay
+      }, 2000);
+
+      setTimeout(() => setShowModal(true), 4000);
       window.removeEventListener("keyup", handleKeyUp);
     }
 
     if (attemptNo >= maxAttempts) {
-      setTimeout(() => setShowModal(true), 2000);
+      setTimeout(() => setShowModal(true), 4000);
       window.removeEventListener("keyup", handleKeyUp);
     }
 

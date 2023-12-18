@@ -38,24 +38,15 @@ body {
   color: var(--text-color-light);
 }
 
-/*
-h1 {
-  font-size: 3em;
-  font-family: 'NYT Karnak Condensed';
-  padding: 20px 0;
-  border-bottom: 1px solid var(--border-color-light);
-  margin: 0 0 30px 0;
-  color: var(--text-color-light);
-}
-*/
-
-h1 {
-  font-size: 3em;
-  font-family: 'NYT Karnak Condensed';
-  color: var(--text-color-light);
-}
 
 /* Grid styles */
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .row {
   text-align: center;
   display: flex;
@@ -88,13 +79,17 @@ h1 {
 .tile.grey {
   --background: var(--grey-color);
   --border-color: var(--grey-color);
-  animation: flip 0.6s ease forwards;
+  animation: flip 0.5s ease forwards;
 }
 
 .tile.yellow {
   --background: var(--yellow-color);
   --border-color: var(--yellow-color);
   animation: flip 0.5s ease forwards;
+}
+
+.tile.waterfall {
+  animation: up-down 0.5s ease-in-out;
 }
 
 .tile:nth-child(2) {
@@ -121,6 +116,7 @@ h1 {
 .keyboard {
   max-width: 500px;
   margin: 20px auto;
+  user-select: none;
 }
 
 .key {
@@ -131,6 +127,7 @@ h1 {
   display: inline-block;
   border-radius: 6px;
   line-height: 50px;
+  font-weight: 600;
 }
 
 .key.big {
@@ -183,26 +180,82 @@ h1 {
   letter-spacing: 1px;
 }
 
+/* Popup styles */
+.invalid-popup {
+  order: 1;
+  position: absolute;
+  /* Fixed positioning to stay on top of content */
+  top: 50%;
+  /* Center vertically */
+  left: 50%;
+  /* Center horizontally */
+  transform: translate(-50%, -50%);
+  /* Adjust based on popup size */
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  display: none;
+  /* Initially hidden */
+  z-index: 100;
+  /* Layer above other components */
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.invalid-popup.visible {
+  display: block;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+
+  /* Show popup when triggered */
+}
+
+
 
 /* Navabr styles */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
   background-color: var(--background-light);
-  color: var(--text-color-light)
+  color: var(--text-color-light);
+  border-bottom: 1px solid var(--border-color-light);
+  margin-top: 10px;
+}
+
+
+h1 {
+  font-size: 3em;
+  font-family: 'NYT Karnak Condensed';
+  color: var(--text-color-light);
+  margin: 0 0 0 0;
+  flex-grow: 1;
+  text-align: center;
+  cursor: default;
+  user-select: none;
+
 }
 
 .menu-icon,
 .icons {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .icon {
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
   cursor: pointer;
+  justify-content: center;
+  scale: 1.2;
+  color: primary;
+}
+
+.mui-icon {
+  background-color: transparent;
+  border-color: transparent;
 }
 
 
@@ -291,6 +344,24 @@ h1.dark {
   60%,
   80% {
     transform: translateX(6px);
+  }
+}
+
+@keyframes up-down {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    background: var(--green-color);
+    border-color: var(--green-color);
+    color: var(--keyboard-text-light);
+  }
+
+  50% {
+    transform: translateY(-75px);
+    background: var(--green-color);
+    border-color: var(--green-color);
+    color: var(--keyboard-text-light);
   }
 }
 
