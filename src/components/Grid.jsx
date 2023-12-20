@@ -9,7 +9,7 @@ export default function Grid({
   isInvalid,
 }) {
   return (
-    <div>
+    <div className="grid">
       {guesses.map((guess, index) => {
         if (attemptNo === index) {
           return (

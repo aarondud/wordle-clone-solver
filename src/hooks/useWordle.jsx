@@ -90,6 +90,7 @@ const useWordle = (solution, validGuesses, wordLength, maxAttempts) => {
           addNewGuess(formatGuess());
         } else {
           setIsInvalid(true);
+          setTimeout(() => setIsInvalid(false), 1000);
         }
       }
     }

@@ -1,14 +1,12 @@
+/** delete ......................... **/
+
 :root {
   --background-light: #fff;
   --border-color-light: #bbb;
   --text-color-light: #333;
 
-  --background-dark: #333;
-  --border-color-dark: #555;
-  --text-color-dark: #eee;
-
   --keyboard-background-light: #eee;
-  --keyboard-text-light: #fff;
+  --keyboard-text-light: #333;
 
   --empty-border-color: #ddd;
   --filled-border-color: #333;
@@ -38,6 +36,10 @@ body {
   color: var(--text-color-light);
 }
 
+.wordle {
+  background-color: var(--background-light);
+  color: var(--text-color-light);
+}
 
 /* Grid styles */
 .grid {
@@ -61,6 +63,7 @@ body {
   display: block;
   width: 60px;
   height: 60px;
+  background-color: var(--background-light);
   border: 1px solid var(--border-color-light);
   margin: 4px;
   text-align: center;
@@ -124,6 +127,7 @@ body {
   width: 40px;
   height: 50px;
   background: var(--keyboard-background-light);
+  color: var(--keyboard-text-light);
   display: inline-block;
   border-radius: 6px;
   line-height: 50px;
@@ -136,19 +140,19 @@ body {
 
 .key.green {
   background: var(--green-color);
-  color: var(--keyboard-text-light);
+  color: var(--keyboard-text-dark);
   transition: all 0.3s ease-in;
 }
 
 .key.yellow {
   background: var(--yellow-color);
-  color: var(--keyboard-text-light);
+  color: var(--keyboard-text-dark);
   transition: all 0.3s ease-in;
 }
 
 .key.grey {
   background: var(--grey-color);
-  color: var(--keyboard-text-light);
+  color: var(--keyboard-text-dark);
   transition: all 0.3s ease-in;
 }
 
@@ -259,111 +263,10 @@ h1 {
 }
 
 
-/* Dark mode styles */
-body.dark {
-  background-color: var(--background-dark);
-  color: var(--text-color-dark);
-}
-
-h1.dark {
-  border-bottom: 1px solid var(--border-color-dark);
-  color: var(--text-color-light);
-}
-
-.row.dark>div {
-  border: 1px solid var(--border-color-dark);
-}
-
-.navbar.dark {
-  background-color: var(--background-dark);
-  color: var(--text-color-dark)
-}
 
 
-/* Keyframe animations */
-@keyframes flip {
-  0% {
-    transform: rotateX(0);
-    background: var(--background-light);
-    border-color: #333;
-  }
 
-  45% {
-    transform: rotateX(90deg);
-    background: var(--background-light);
-    border-color: #333;
-  }
 
-  55% {
-    transform: rotateX(90deg);
-    background: var(--background);
-    border-color: var(--border-color);
-  }
-
-  100% {
-    transform: rotateX(0deg);
-    background: var(--background);
-    border-color: var(--border-color);
-    color: #eee;
-  }
-}
-
-@keyframes bounce {
-  0% {
-    transform: scale(1);
-    border-color: var(--empty-border-color);
-  }
-
-  50% {
-    transform: scale(1.2);
-  }
-
-  100% {
-    transform: scale(1);
-    border-color: var(--filled-border-color);
-  }
-}
-
-@keyframes shake {
-
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    transform: translateX(-4px);
-  }
-
-  20%,
-  40%,
-  60%,
-  80% {
-    transform: translateX(6px);
-  }
-}
-
-@keyframes up-down {
-
-  0%,
-  100% {
-    transform: translateY(0);
-    background: var(--green-color);
-    border-color: var(--green-color);
-    color: var(--keyboard-text-light);
-  }
-
-  50% {
-    transform: translateY(-75px);
-    background: var(--green-color);
-    border-color: var(--green-color);
-    color: var(--keyboard-text-light);
-  }
-}
 
 /* Cursor styles */
 .hover-clickable {

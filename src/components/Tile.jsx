@@ -1,10 +1,10 @@
 import React from "react";
 
-const Tile = ({ letter, color, filled, isCurrent }) => (
+const Tile = ({ letter, color, filled, past, isCurrent }) => (
   <div
-    className={`tile ${filled ? "filled" : ""} ${color ? color : ""} ${
-      isCurrent ? "current" : ""
-    }`}
+    className={`tile ${filled ? "filled" : ""} ${past ? "past" : ""} ${
+      color ? color : ""
+    } ${isCurrent ? "current" : ""}`}
     key={letter}
   >
     {letter || ""}

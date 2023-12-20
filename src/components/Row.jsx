@@ -1,13 +1,13 @@
-import { useEffect } from "react";
 import React from "react";
 import Tile from "./Tile.jsx";
+import InvalidPopup from "./InvalidPopup.jsx";
 
 export default function Row({ wordLength, guess, currentGuess, isInvalid }) {
   if (guess) {
     return (
       <div className="row past">
         {guess.map((letter, index) => (
-          <Tile key={index} color={letter.color} letter={letter.key} />
+          <Tile key={index} past color={letter.color} letter={letter.key} />
         ))}
       </div>
     );
@@ -26,6 +26,7 @@ export default function Row({ wordLength, guess, currentGuess, isInvalid }) {
             isCurrent
           />
         ))}
+        {isInvalid && <InvalidPopup visible={isInvalid} />}
         {[...Array(wordLength - letters.length)].map((_, index) => (
           <Tile key={index} />
         ))}

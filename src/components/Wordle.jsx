@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import useWordle from "../hooks/useWordle";
 import Grid from "./Grid";
 import Keyboard from "./Keyboard";
@@ -40,7 +40,7 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
   }, [handleKeyUp, isCorrect, attemptNo]);
 
   return (
-    <div>
+    <div className="wordle">
       <div>solution - {solution}</div>
       <Grid
         currentGuess={currentGuess}

@@ -1,0 +1,81 @@
+/* Dark theme styles */
+:root {
+    --background-dark: #333;
+    --border-dark: #555;
+    --text-dark: #eee;
+
+    --keyboard-background-dark: #eee;
+    --keyboard-text-dark: #fff;
+}
+
+
+/* General */
+#dark .App {
+    background-color: var(--background-dark);
+    color: var(--text-color-dark);
+}
+
+#dark .wordle {
+    background-color: var(--background-dark);
+    color: var(--text-color-dark);
+}
+
+
+/* Grid */
+#dark .row {
+    background-color: var(--background-dark);
+    border: 1px solid var(--border-dark);
+    color: var(--text-dark)
+}
+
+#dark .row>div {
+    border: 1px solid var(--border-dark);
+}
+
+#dark .tile {
+    background-color: var(--background-dark);
+    border: 1px solid var(--border-color-dark);
+}
+
+
+/* Keyboard */
+#dark .key {
+    background: var(--keyboard-background-dark);
+    color: var(--keyboard-text-dark);
+}
+
+
+/* Navbar */
+#dark .navbar {
+    background-color: var(--background-dark);
+    color: var(--text-dark)
+}
+
+#dark .h1 {
+    border-bottom: 1px solid var(--border-dark);
+    color: var(--text-dark);
+}
+
+#dark .icon {
+    color: primary;
+}
+
+#dark .mui-icon {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+
+/* Modal */
+#dark .modal {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+#dark .modal>div {
+    background: #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+#dark .modal .solution {
+    color: #ff004c;
+}
