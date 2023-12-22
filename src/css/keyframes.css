@@ -74,24 +74,13 @@
     0%,
     100% {
         transform: translateY(0);
-        background: var(--green-color);
-        border-color: var(--green-color);
-        color: var(--keyboard-text-dark);
     }
 
     40% {
         transform: translateY(-75px);
-        background: var(--green-color);
-        border-color: var(--green-color);
-        color: var(--keyboard-text-dark);
     }
 
     80% {
         transform: translateY(10px);
-        background: var(--green-color);
-        border-color: var(--green-color);
-        color: var(--keyboard-text-dark);
     }
-
-
 }

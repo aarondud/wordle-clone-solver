@@ -3,6 +3,7 @@ import useWordle from "../hooks/useWordle";
 import Grid from "./Grid";
 import Keyboard from "./Keyboard";
 import Modal from "./Modal";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
   const {
@@ -15,6 +16,7 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
     isInvalid,
   } = useWordle(solution, validGuesses, wordLength, maxAttempts);
   const [showModal, setShowModal] = useState(false);
+  const { darkTheme, _ } = useContext(ThemeContext);
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyUp);
@@ -40,7 +42,7 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
   }, [handleKeyUp, isCorrect, attemptNo]);
 
   return (
-    <div className="wordle">
+    <div className={`wordle ${darkTheme ? "dark" : ""}`}>
       <div>solution - {solution}</div>
       <Grid
         currentGuess={currentGuess}

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import Row from "./Row";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 export default function Grid({
   guesses,
@@ -8,8 +9,9 @@ export default function Grid({
   wordLength,
   isInvalid,
 }) {
+  const { darkTheme } = useContext(ThemeContext);
   return (
-    <div className="grid">
+    <div className={`grid ${darkTheme ? "dark" : ""}`}>
       {guesses.map((guess, index) => {
         if (attemptNo === index) {
           return (

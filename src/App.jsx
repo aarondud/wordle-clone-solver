@@ -1,8 +1,8 @@
-import "./App.css";
 import Wordle from "./components/Wordle.jsx";
 import Navbar from "./components/Navbar.jsx";
 import { useEffect, useState } from "react";
 import { fetchData } from "./utils/dataFetcher.js";
+import { ThemeProvider } from "./contexts/ThemeContext.jsx";
 
 function App() {
   const [words, setWords] = useState(null);
@@ -10,7 +10,6 @@ function App() {
   const [gameMode, setGameMode] = useState("Wordle");
   const [wordLength, setWordLength] = useState(5);
   const [maxAttempts, setMaxAttempts] = useState(6);
-  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     fetchData(gameMode).then((data) => {
@@ -21,10 +20,6 @@ function App() {
     });
   }, [gameMode]);
 
-  const toggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode);
-  };
-
   const toggleGameMode = () => {
     setGameMode((prevMode) => (prevMode === "Wordle" ? "Wordle+" : "Wordle"));
     setWordLength((prevMode) => (prevMode === 5 ? 6 : 5));
@@ -34,24 +29,23 @@ function App() {
   const toggleInfo = () => {};
 
   return (
-    <div className="App">
-      <Navbar
-        darkMode={darkMode}
-        toggleDarkMode={toggleDarkMode}
-        gameMode={gameMode}
-        toggleGameMode={toggleGameMode}
-        toggleInfo={toggleInfo}
-      />
-      {words && solution && (
-        <Wordle
-          className={darkMode ? "dark" : ""}
-          solution={solution}
-          validGuesses={words}
-          wordLength={wordLength}
-          maxAttempts={maxAttempts}
+    <ThemeProvider>
+      <div className="App">
+        <Navbar
+          gameMode={gameMode}
+          toggleGameMode={toggleGameMode}
+          toggleInfo={toggleInfo}
         />
-      )}
-    </div>
+        {words && solution && (
+          <Wordle
+            solution={solution}
+            validGuesses={words}
+            wordLength={wordLength}
+            maxAttempts={maxAttempts}
+          />
+        )}
+      </div>
+    </ThemeProvider>
   );
 }
 

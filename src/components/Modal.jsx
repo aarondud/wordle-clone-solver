@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 export default function Modal({ isCorrect, attemptNo, solution }) {
+  const { darkTheme } = useContext(ThemeContext);
   return (
-    <div className="modal">
+    <div className={`modal ${darkTheme ? "dark" : ""}`}>
       {isCorrect && (
         <div>
           <h1>You Win!</h1>
