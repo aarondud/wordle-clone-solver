@@ -1,5 +1,5 @@
-import * as utils from "./utils.mjs";
-import { words } from "./words.mjs";
+import * as utils from "./utils.js";
+import { words } from "./words.js";
 
 export class Attempt {
   constructor(guess, evaluation) {

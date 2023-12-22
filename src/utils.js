@@ -1,4 +1,4 @@
-import { words } from "./words.mjs";
+import { words } from "./words.js";
 
 function isAWord(word) {
   return word in words;
