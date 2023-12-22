@@ -21,7 +21,7 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import ThemeToggler from "./ThemeToggler";
 
 export default function Navbar({ toggleGameMode, gameMode, toggleInfo }) {
-  const { darkTheme, toggleTheme } = useContext(ThemeContext);
+  const { darkTheme } = useContext(ThemeContext);
 
   return (
     <nav className={`navbar ${darkTheme ? "dark" : ""}`}>
