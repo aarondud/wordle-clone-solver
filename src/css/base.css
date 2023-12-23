@@ -227,7 +227,7 @@ h1 {
     user-select: none;
 }
 
-header {
+title {
     display: center;
     justify-content: center;
     align-items: center;
@@ -235,7 +235,7 @@ header {
     align-content: center;
 }
 
-.menu-icon,
+.social-icons,
 .icons {
     display: flex;
     align-items: center;
@@ -243,21 +243,16 @@ header {
 }
 
 .icon {
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 6px;
+    margin-right: 6px;
     cursor: pointer;
     justify-content: center;
-    scale: 1.2;
-    color: primary;
+    scale: 1.3;
+    color: var(--primary);
 }
 
 .icon.inverted {
     transform: rotate(180deg);
-}
-
-.mui-icon {
-    background-color: transparent;
-    border-color: transparent;
 }
 
 /* Invalid pop-up */

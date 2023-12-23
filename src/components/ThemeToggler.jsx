@@ -6,14 +6,14 @@ function ThemeToggler() {
   const { darkTheme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <button
+    <div
       className="icon"
       onClick={toggleTheme}
       onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
       tabIndex="-1"
     >
       {darkTheme ? <DarkMode /> : <LightMode />}
-    </button>
+    </div>
   );
 }
 

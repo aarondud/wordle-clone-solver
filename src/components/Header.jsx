@@ -7,42 +7,48 @@ import GameModeSelector from "./GameModeSelector";
 export default function Header({ toggleGameMode, gameMode, toggleInfo }) {
   const { darkTheme } = useContext(ThemeContext);
 
+  const renderSocialIcons = () => (
+    <>
+      <a
+        className="icon"
+        href="https://github.com/aarondud/wordle_clone_solver"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <GitHub />
+      </a>
+      <a
+        className="icon"
+        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <LogoDev />
+      </a>
+      <a
+        className="icon"
+        href="https://www.linkedin.com/in/aaron-dudley/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <LinkedIn />
+      </a>
+    </>
+  );
+
   return (
     <nav className={`navbar ${darkTheme ? "dark" : ""}`}>
-      <div className="icons">
-        <a className="icon">
-          <LogoDev />
-        </a>
-        <a
-          className="icon"
-          href="https://www.linkedin.com/in/aaron-dudley/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <LinkedIn />
-        </a>
-        <a
-          className="icon"
-          href="https://github.com/aarondud/wordle_clone_solver"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <GitHub />
-        </a>
-      </div>
-      <div className="header">
+      <div className="social-icons">{renderSocialIcons()}</div>
+      <div className="title">
         <h1>{gameMode}</h1>
       </div>
       <div className="icons">
-        <button className="icon" onClick={toggleInfo}>
+        <div className="icon" onClick={toggleInfo}>
           <Info />
-        </button>
+        </div>
         <ThemeToggler />
         <GameModeSelector />
       </div>
     </nav>
   );
 }
-/*  <div className="icon" onClick={toggleGameMode}>
-          {gameMode === "Wordle" ? <FaToggleOff /> : <FaToggleOn />}
-        </div> */

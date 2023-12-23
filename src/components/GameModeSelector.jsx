@@ -2,9 +2,8 @@ import React, { useContext, useState } from "react";
 import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
 import { ThemeContext } from "../contexts/ThemeContext";
 
-const { darkTheme } = useContext(ThemeContext);
-
 export default function GameModeSelector() {
+  const { darkTheme } = useContext(ThemeContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
@@ -48,6 +47,7 @@ export default function GameModeSelector() {
 }
 
 function DropDownItem({ gameMode, className }) {
+  const { darkTheme } = useContext(ThemeContext);
   return (
     <button className={`dropdown-item ${className} ${darkTheme ? "dark" : ""}`}>
       {gameMode}
