@@ -16,6 +16,7 @@ function App() {
       if (data) {
         setWords(data.words);
         setSolution(data.solution);
+        console.log("solution", data.solution);
       }
     });
   }, [gameMode]);

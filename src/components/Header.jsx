@@ -1,22 +1,6 @@
-import React from "react";
-import { useContext } from "react";
-import {
-  FaBars,
-  FaGithub,
-  FaSun,
-  FaMoon,
-  FaToggleOff,
-  FaToggleOn,
-  FaInfoCircle,
-} from "react-icons/fa";
-import {
-  LinkedIn,
-  GitHub,
-  LogoDev,
-  Info,
-  LightMode,
-  DarkMode,
-} from "@mui/icons-material";
+import React, { useContext } from "react";
+import { FaToggleOff, FaToggleOn } from "react-icons/fa";
+import { LinkedIn, GitHub, LogoDev, Info } from "@mui/icons-material";
 import { ThemeContext } from "../contexts/ThemeContext";
 import ThemeToggler from "./ThemeToggler";
 

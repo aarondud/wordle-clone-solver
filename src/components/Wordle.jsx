@@ -43,7 +43,6 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
 
   return (
     <div className={`wordle ${darkTheme ? "dark" : ""}`}>
-      <div>solution - {solution}</div>
       <Grid
         currentGuess={currentGuess}
         guesses={guesses}

@@ -8,11 +8,7 @@ const ThemeContext = createContext({
 const ThemeProvider = ({ children }) => {
   const [darkTheme, setTheme] = useState(false);
 
-  const toggleTheme = () =>
-    setTheme((prev) => {
-      console.log("toggling theme", darkTheme);
-      return !prev;
-    });
+  const toggleTheme = () => setTheme((prev) => !prev);
 
   return (
     <ThemeContext.Provider value={{ darkTheme, toggleTheme }}>

@@ -37,9 +37,11 @@ body {
     font-family: verdana;
     margin: 0 0 0 0;
     height: 100vh;
-    transition: all 0.3s ease;
 }
 
+body * {
+    transition: all 0.3s ease;
+}
 
 .wordle {
     background-color: var(--background-light);
@@ -54,6 +56,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-top: 20px;
 }
 
 .row {
@@ -219,6 +222,14 @@ h1 {
     text-align: center;
     cursor: default;
     user-select: none;
+}
+
+header {
+    display: center;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
 }
 
 .menu-icon,
