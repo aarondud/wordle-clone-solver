@@ -39,17 +39,22 @@ body {
     font-size: 1em;
     font-family: verdana;
     margin: 0 0 0 0;
-    height: 100vh;
 }
 
 body * {
     transition: all 0.3s ease;
 }
 
+.App {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .wordle {
     background-color: var(--background-light);
     color: var(--text-light);
-    height: 100vh;
+    flex: 1;
 }
 
 
@@ -328,4 +333,20 @@ body * {
 .dropdown-item:hover {
     background-color: var(--hover-background);
     transition: 750ms ease;
+}
+
+
+/* Footer */
+.footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    padding-right: 3px;
+    padding-bottom: 3px;
+    text-align: right;
+    font-style: italic;
+    font-size: 0.7em;
+    background-color: var(--background-light);
+    color: var(--text-light);
 }

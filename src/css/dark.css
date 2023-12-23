@@ -93,3 +93,9 @@
     background-color: var(--hover-background);
     transition: 750ms ease;
 }
+
+/* Footer */
+.footer.dark {
+    background-color: var(--background-dark);
+    color: var(--text-dark)
+}

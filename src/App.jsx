@@ -1,5 +1,6 @@
 import Wordle from "./components/Wordle.jsx";
 import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 import { useEffect, useState } from "react";
 import { fetchData } from "./utils/dataFetcher.js";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
@@ -45,6 +46,7 @@ function App() {
             maxAttempts={maxAttempts}
           />
         )}
+        <Footer />
       </div>
     </ThemeProvider>
   );
