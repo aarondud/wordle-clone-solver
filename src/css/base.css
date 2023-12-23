@@ -10,7 +10,10 @@
     --modal-background-light: rgba(255, 255, 255, 0.7);
     --modal-shadow-light: rgba(0, 0, 0, 0.3);
 
-    /* Consistent colours */
+    --hover-background: #dcdcdc;
+    --shadow-light: 0px 4px 8px rgba(0, 0, 0, 0.15);
+
+    /* Standard colours */
     --keyboard-background: #eee;
     --keyboard-text-unselected: #333;
     --keyboard-text-selected: #eee;
@@ -248,6 +251,10 @@ header {
     color: primary;
 }
 
+.icon.inverted {
+    transform: rotate(180deg);
+}
+
 .mui-icon {
     background-color: transparent;
     border-color: transparent;
@@ -280,4 +287,58 @@ header {
 /* Cursor styles */
 .hover-clickable {
     cursor: pointer;
+}
+
+/* Dropdown menu */
+.menu-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 190%;
+    right: 25%;
+    z-index: 10;
+    border-radius: 10px;
+    width: max-content;
+    box-shadow: var(--shadow-light);
+    transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu.inactive {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+}
+
+.dropdown-item {
+    display: block;
+    text-align: center;
+    padding: 8px 30px;
+    width: 100%;
+    border: none;
+    background-color: var(--background-light);
+    color: var(--text-light);
+    font-family: 'NYT Karnak Condensed';
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.dropdown-item.top-radius {
+    border-radius: 10px 10px 0 0;
+}
+
+.dropdown-item.bottom-radius {
+    border-radius: 0 0 10px 10px;
+}
+
+.dropdown-item:hover {
+    background-color: var(--hover-background);
+    transition: 750ms ease;
 }

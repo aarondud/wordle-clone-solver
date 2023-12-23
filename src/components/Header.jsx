@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { LinkedIn, GitHub, LogoDev, Info } from "@mui/icons-material";
 import { ThemeContext } from "../contexts/ThemeContext";
 import ThemeToggler from "./ThemeToggler";
+import GameModeSelector from "./GameModeSelector";
 
 export default function Header({ toggleGameMode, gameMode, toggleInfo }) {
   const { darkTheme } = useContext(ThemeContext);
@@ -38,11 +38,11 @@ export default function Header({ toggleGameMode, gameMode, toggleInfo }) {
           <Info />
         </button>
         <ThemeToggler />
-
-        <div className="icon" onClick={toggleGameMode}>
-          {gameMode === "Wordle" ? <FaToggleOff /> : <FaToggleOn />}
-        </div>
+        <GameModeSelector />
       </div>
     </nav>
   );
 }
+/*  <div className="icon" onClick={toggleGameMode}>
+          {gameMode === "Wordle" ? <FaToggleOff /> : <FaToggleOn />}
+        </div> */
