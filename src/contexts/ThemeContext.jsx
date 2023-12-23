@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 const ThemeContext = createContext({
   darkTheme: null,
@@ -7,6 +7,13 @@ const ThemeContext = createContext({
 
 const ThemeProvider = ({ children }) => {
   const [darkTheme, setTheme] = useState(false);
+
+  useEffect(() => {
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    setTheme(prefersDark);
+  }, []);
 
   const toggleTheme = () => setTheme((prev) => !prev);
 
