@@ -20,7 +20,7 @@ import {
 import { ThemeContext } from "../contexts/ThemeContext";
 import ThemeToggler from "./ThemeToggler";
 
-export default function Navbar({ toggleGameMode, gameMode, toggleInfo }) {
+export default function Header({ toggleGameMode, gameMode, toggleInfo }) {
   const { darkTheme } = useContext(ThemeContext);
 
   return (

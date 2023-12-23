@@ -1,5 +1,5 @@
 import Wordle from "./components/Wordle.jsx";
-import Navbar from "./components/Navbar.jsx";
+import Header from "./components/Header.jsx";
 import { useEffect, useState } from "react";
 import { fetchData } from "./utils/dataFetcher.js";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
@@ -31,7 +31,7 @@ function App() {
   return (
     <ThemeProvider>
       <div className="App">
-        <Navbar
+        <Header
           gameMode={gameMode}
           toggleGameMode={toggleGameMode}
           toggleInfo={toggleInfo}

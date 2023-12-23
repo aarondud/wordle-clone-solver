@@ -11,6 +11,10 @@
     --filled-border-dark: #ddd;
 }
 
+body * {
+    transition: all 0.3s ease;
+}
+
 /* General styles */
 .wordle.dark {
     background-color: var(--background-dark);
