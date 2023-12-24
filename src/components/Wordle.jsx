@@ -50,7 +50,6 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
         wordLength={wordLength}
         isInvalid={isInvalid}
       />
-      <Keyboard usedKeys={usedKeys} handleKeyUp={handleKeyUp} />
       {showModal && (
         <Modal
           isCorrect={isCorrect}
@@ -58,6 +57,7 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
           solution={solution}
         />
       )}
+      <Keyboard usedKeys={usedKeys} handleKeyUp={handleKeyUp} />
     </div>
   );
 };
