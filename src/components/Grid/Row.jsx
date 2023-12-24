@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import Tile from "./Tile.jsx";
 import InvalidPopup from "./InvalidPopup.jsx";
-import { ThemeContext } from "../contexts/ThemeContext.jsx";
-import { GameModeContext } from "../contexts/GameModeContext.jsx";
+import { ThemeContext } from "../../contexts/ThemeContext.jsx";
+import { GameModeContext } from "../../contexts/GameModeContext.jsx";
 
 export default function Row({ guess, currentGuess, isInvalid }) {
   const { darkTheme } = useContext(ThemeContext);

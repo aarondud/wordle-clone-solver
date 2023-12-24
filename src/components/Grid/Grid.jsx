@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Row from "./Row";
-import { ThemeContext } from "../contexts/ThemeContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 export default function Grid({ guesses, currentGuess, attemptNo, isInvalid }) {
   const { darkTheme } = useContext(ThemeContext);

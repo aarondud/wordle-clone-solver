@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
-import { ThemeContext } from "../contexts/ThemeContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 export default function GameModeSelector() {
   const { darkTheme } = useContext(ThemeContext);

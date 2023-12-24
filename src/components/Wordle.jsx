@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import useWordle from "../hooks/useWordle";
-import Grid from "./Grid";
-import Keyboard from "./Keyboard";
+import Grid from "./Grid/Grid";
+import Keyboard from "./Keyboard/Keyboard";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { GameModeContext } from "../contexts/GameModeContext";
 

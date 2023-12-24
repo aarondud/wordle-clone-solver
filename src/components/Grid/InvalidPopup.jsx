@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../contexts/ThemeContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 export default function InvalidPopup({ visible }) {
   const { darkTheme } = useContext(ThemeContext);
