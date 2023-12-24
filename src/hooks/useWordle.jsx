@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { GameModeContext } from "../contexts/GameModeContext";
 
 const useWordle = () => {
-  const { solution, validGuesses, wordLength, maxAttempts } =
+  const { solution, validGuesses, wordLength, maxAttempts, toggleGameMode } =
     useContext(GameModeContext);
   const [attemptNo, setAttemptNo] = useState(0);
   const [currentGuess, setCurrentGuess] = useState("");
@@ -111,14 +111,26 @@ const useWordle = () => {
     }
   };
 
+  const newGame = (gameMode) => {
+    toggleGameMode(gameMode);
+    setAttemptNo(0);
+    currentGuess("");
+    setGuesses([...Array(maxAttempts)]);
+    setHistory([]);
+    setIsCorrect(false);
+    setUsedKeys({});
+    setIsInvalid(null);
+  };
+
   return {
     attemptNo,
     currentGuess,
     guesses,
     isCorrect,
     usedKeys,
-    handleKeyUp,
     isInvalid,
+    handleKeyUp,
+    newGame,
   };
 };
 
