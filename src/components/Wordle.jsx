@@ -4,8 +4,12 @@ import Grid from "./Grid";
 import Keyboard from "./Keyboard";
 import Modal from "./Modal";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { GameModeContext } from "../contexts/GameModeContext";
 
-const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
+const Wordle = () => {
+  const { darkTheme } = useContext(ThemeContext);
+  const { maxAttempts } = useContext(GameModeContext);
+
   const {
     currentGuess,
     guesses,
@@ -14,9 +18,9 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
     usedKeys,
     handleKeyUp,
     isInvalid,
-  } = useWordle(solution, validGuesses, wordLength, maxAttempts);
+  } = useWordle();
   const [showModal, setShowModal] = useState(false);
-  const { darkTheme, _ } = useContext(ThemeContext);
+  //TODO showHelper here
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyUp);
@@ -47,16 +51,9 @@ const Wordle = ({ solution, validGuesses, wordLength, maxAttempts }) => {
         currentGuess={currentGuess}
         guesses={guesses}
         attemptNo={attemptNo}
-        wordLength={wordLength}
         isInvalid={isInvalid}
       />
-      {showModal && (
-        <Modal
-          isCorrect={isCorrect}
-          attemptNo={attemptNo}
-          solution={solution}
-        />
-      )}
+      {showModal && <Modal isCorrect={isCorrect} attemptNo={attemptNo} />}
       <Keyboard usedKeys={usedKeys} handleKeyUp={handleKeyUp} />
     </div>
   );

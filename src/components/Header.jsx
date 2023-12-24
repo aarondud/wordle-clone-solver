@@ -3,9 +3,11 @@ import { LinkedIn, GitHub, LogoDev, Info } from "@mui/icons-material";
 import { ThemeContext } from "../contexts/ThemeContext";
 import ThemeToggler from "./ThemeToggler";
 import GameModeSelector from "./GameModeSelector";
+import { GameModeContext } from "../contexts/GameModeContext";
 
-export default function Header({ toggleGameMode, gameMode, toggleInfo }) {
+export default function Header({ toggleInfo }) {
   const { darkTheme } = useContext(ThemeContext);
+  const { gameMode } = useContext(GameModeContext);
 
   const renderSocialIcons = () => (
     <>

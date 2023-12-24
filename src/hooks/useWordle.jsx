@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { GameModeContext } from "../contexts/GameModeContext";
 
-const useWordle = (solution, validGuesses, wordLength, maxAttempts) => {
+const useWordle = () => {
+  const { solution, validGuesses, wordLength, maxAttempts } =
+    useContext(GameModeContext);
   const [attemptNo, setAttemptNo] = useState(0);
   const [currentGuess, setCurrentGuess] = useState("");
   const [guesses, setGuesses] = useState([...Array(maxAttempts)]);
