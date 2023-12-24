@@ -5,7 +5,7 @@ import ThemeToggler from "./ThemeToggler";
 import GameModeSelector from "./GameModeSelector";
 import { GameModeContext } from "../contexts/GameModeContext";
 
-export default function Header({ toggleInfo }) {
+export default function Header({ setShowModal, setModalType }) {
   const { darkTheme } = useContext(ThemeContext);
   const { gameMode } = useContext(GameModeContext);
 
@@ -45,7 +45,13 @@ export default function Header({ toggleInfo }) {
         <h1>{gameMode}</h1>
       </div>
       <div className="icons">
-        <div className="icon" onClick={toggleInfo}>
+        <div
+          className="icon"
+          onClick={() => {
+            setModalType("helper");
+            setShowModal(true);
+          }}
+        >
           <Info />
         </div>
         <ThemeToggler />
