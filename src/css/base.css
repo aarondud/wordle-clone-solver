@@ -362,6 +362,12 @@ body * {
     cursor: pointer;
 }
 
+.dropdown-item.current {
+    background-color: var(--border-light);
+    color: var(--text-light);
+    cursor: default;
+}
+
 .dropdown-item.top-radius {
     border-radius: 10px 10px 0 0;
 }
@@ -373,6 +379,10 @@ body * {
 .dropdown-item:hover {
     background-color: var(--hover-background);
     transition: 750ms ease;
+}
+
+.dropdown-item.current:hover {
+    background-color: var(--border-light);
 }
 
 
