@@ -27,7 +27,7 @@ const Wordle = ({ setShowModal, setModalType }) => {
       const winningRow = Array.from(rowElements).pop();
       const tiles = Array.from(winningRow.querySelectorAll(".tile"));
       setTimeout(() => {
-        tiles.map((tileElement) => tileElement.classList.add("waterfall")); // Add waterfall animation after delay
+        tiles.map((tileElement) => tileElement.classList.add("waterfall"));
       }, 2000);
 
       setTimeout(() => {
