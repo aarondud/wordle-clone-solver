@@ -76,7 +76,7 @@
 /* Invalid pop-up */
 .invalid-popup.dark {
     background-color: var(--background-dark);
-    border: 0.5px solid var(--filled-border-dark);
+    box-shadow: var(--shadow-dark);
 }
 
 

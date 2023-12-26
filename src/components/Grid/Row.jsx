@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import Tile from "./Tile.jsx";
-import InvalidPopup from "./InvalidPopup.jsx";
 import { ThemeContext } from "../../contexts/ThemeContext.jsx";
 import { GameModeContext } from "../../contexts/GameModeContext.jsx";
 
 export default function Row({ guess, currentGuess, isInvalid }) {
   const { darkTheme } = useContext(ThemeContext);
   const { wordLength } = useContext(GameModeContext);
+
   if (guess) {
     return (
       <div className={`row past ${darkTheme ? "dark" : ""}`}>
@@ -34,7 +34,6 @@ export default function Row({ guess, currentGuess, isInvalid }) {
             isCurrent
           />
         ))}
-        {isInvalid && <InvalidPopup visible={isInvalid} />}
         {[...Array(wordLength - letters.length)].map((_, index) => (
           <Tile key={index} />
         ))}

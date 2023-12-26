@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Row from "./Row";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import InvalidPopup from "./InvalidPopup";
 
 export default function Grid({ guesses, currentGuess, attemptNo, isInvalid }) {
   const { darkTheme } = useContext(ThemeContext);
@@ -19,6 +20,7 @@ export default function Grid({ guesses, currentGuess, attemptNo, isInvalid }) {
         }
         return <Row key={index} guess={guess} />;
       })}
+      {isInvalid && <InvalidPopup visible={isInvalid} />}
     </div>
   );
 }
