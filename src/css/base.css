@@ -194,9 +194,10 @@ body * {
 }
 
 .modal-content {
+    position: relative;
     margin: 77.5px auto;
     max-width: 350px;
-    height: 400px;
+    max-height: 800px;
     padding: 20px;
     border-radius: 10px;
     background: var(--background-light);
@@ -244,11 +245,20 @@ body * {
     cursor: pointer;
 }
 
-.new-game-button:hover {
+.modal-content button:hover {
     background-color: var(--hover-background);
     transition: 750ms ease;
 }
 
+.modal-exit-button {
+    position: absolute;
+    top: 4%;
+    right: 4%;
+    border: none;
+    background-color: var(--background-light);
+    cursor: pointer;
+    border-radius: 100px
+}
 
 /* Navabr styles */
 .navbar {
