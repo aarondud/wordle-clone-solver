@@ -20,7 +20,7 @@ function App() {
           {showModal && (
             <Modal
               modalType={modalType}
-              setModalType={setModalType}
+              showModal={showModal}
               setShowModal={setShowModal}
             />
           )}

@@ -41,9 +41,7 @@ export default function Header({ setShowModal, setModalType }) {
   return (
     <nav className={`navbar ${darkTheme ? "dark" : ""}`}>
       <div className="social-icons">{renderSocialIcons()}</div>
-      <div className="title">
-        <h1>{gameMode}</h1>
-      </div>
+      <h1 className="title">{gameMode}</h1>
       <div className="icons">
         <div
           className="icon"

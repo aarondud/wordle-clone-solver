@@ -9,7 +9,7 @@ const HelperModal = ({ setShowModal }) => {
   return (
     <div className={`modal-content ${darkTheme ? "dark" : ""}`}>
       <button
-        className={`modal-exit-button`}
+        className={`modal-exit-button ${darkTheme ? "dark" : ""}`}
         onClick={() => setShowModal(false)}
       >
         <CloseIcon />

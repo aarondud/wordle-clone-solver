@@ -33,18 +33,15 @@ export default function GameModeSelector() {
       >
         <ArrowDropDownCircleIcon />
       </div>
-
-      {dropdownOpen && ( //TODO: adding this removed aniamtion
-        <div
-          className={`dropdown-menu ${dropdownOpen ? "active" : "inactive"} ${
-            darkTheme ? "dark" : ""
-          }`}
-        >
-          <DropDownItem newGameMode={"Wordl"} className="top-radius" />
-          <DropDownItem newGameMode={"Wordle"} className="no-radius" />
-          <DropDownItem newGameMode={"Worldee"} className="bottom-radius" />
-        </div>
-      )}
+      <div
+        className={`dropdown-menu ${dropdownOpen ? "active" : "inactive"} ${
+          darkTheme ? "dark" : ""
+        }`}
+      >
+        <DropDownItem newGameMode={"Wordl"} className="top-radius" />
+        <DropDownItem newGameMode={"Wordle"} className="no-radius" />
+        <DropDownItem newGameMode={"Worldee"} className="bottom-radius" />
+      </div>
     </div>
   );
 }

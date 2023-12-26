@@ -56,6 +56,11 @@
     color: var(--text-dark);
 }
 
+.modal-exit-button.dark {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
 
 /* Navbar styles */
 .navbar.dark {
@@ -91,9 +96,12 @@
     color: var(--text-dark)
 }
 
+.dropdown-item.current.dark {
+    background-color: var(--grey-color);
+}
+
 .dropdown-item.dark:hover {
     background-color: var(--hover-background);
-    transition: 750ms ease;
 }
 
 /* Footer */
