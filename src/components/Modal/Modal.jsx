@@ -8,22 +8,14 @@ const Modal = ({ modalType, showModal, setShowModal }) => {
 
   return (
     <div
-      className={`modal-overlay ${showModal ? "visisble" : ""} ${
+      className={`modal-overlay ${showModal ? "visible" : ""} ${
         darkTheme ? "dark" : ""
       }`}
     >
       {modalType === "helper" ? (
-        <HelperModal
-          className={`helper ${showModal ? "visisble" : ""}`}
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
+        <HelperModal showModal={showModal} setShowModal={setShowModal} />
       ) : (
-        <EndOfGameModal
-          className={`end-of-game ${showModal ? "visisble" : ""}`}
-          setShowModal={setShowModal}
-          modalType={modalType}
-        />
+        <EndOfGameModal setShowModal={setShowModal} modalType={modalType} />
       )}
     </div>
   );

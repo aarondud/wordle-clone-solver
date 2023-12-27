@@ -19,6 +19,7 @@ function App() {
           <Footer />
           {showModal && (
             <Modal
+              key={showModal}
               modalType={modalType}
               showModal={showModal}
               setShowModal={setShowModal}

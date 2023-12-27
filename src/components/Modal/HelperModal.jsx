@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { GameModeContext } from "../../contexts/GameModeContext";
@@ -6,27 +6,30 @@ import { GameModeContext } from "../../contexts/GameModeContext";
 const HelperModal = ({ showModal, setShowModal }) => {
   const { darkTheme } = useContext(ThemeContext);
   const { gameMode, wordLength } = useContext(GameModeContext);
+  const modalContent = useRef(null);
 
-  /*
   useEffect(() => {
     const handleClickOutsideModal = (event) => {
-      const modalContent = document.querySelector(".modal-content");
-      console.log(showModal);
-      if (showModal && !modalContent.contains(event.target)) {
+      if (showModal && !modalContent.current.contains(event.target)) {
         setShowModal(false);
       }
     };
 
-    document.body.addEventListener("click", handleClickOutsideModal);
+    const modalOverlay = document.querySelector(".modal-overlay");
+    modalOverlay.addEventListener("click", handleClickOutsideModal);
 
     return () => {
-      document.body.removeEventListener("click", handleClickOutsideModal);
+      modalOverlay.removeEventListener("click", handleClickOutsideModal);
     };
   }, [showModal]);
-  */
 
   return (
-    <div className={`modal-content helper ${darkTheme ? "dark" : ""}`}>
+    <div
+      className={`modal-content helper ${showModal ? "visible" : ""} ${
+        darkTheme ? "dark" : ""
+      }`}
+      ref={modalContent}
+    >
       <button
         className={`modal-exit-button ${darkTheme ? "dark" : ""}`}
         onClick={() => setShowModal(false)}
