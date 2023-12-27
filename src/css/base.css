@@ -206,6 +206,17 @@ body * {
     cursor: default;
 }
 
+.modal-overlay,
+.modal-content {
+    opacity: 0;
+}
+
+.modal-overlay.visible,
+.modal-content.visible {
+    opacity: 1;
+    transition: opacity .3s ease-out;
+}
+
 .modal-content.helper p.gameMode {
     display: inline-block;
     font-family: 'NYT Karnak Condensed';

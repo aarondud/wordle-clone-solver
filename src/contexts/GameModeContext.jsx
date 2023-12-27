@@ -10,16 +10,16 @@ const GameModeContext = createContext({
 });
 
 const GameModeProvider = ({ children }) => {
-  const [gameMode, setGameMode] = useState("Wordle");
-  const [wordLength, setWordLength] = useState(5);
-  const [validGuesses, setValidGuesses] = useState(null);
-  const [solution, setSolution] = useState(null);
-
   const gameModes = {
     Wordl: 4,
     Wordle: 5,
     Wordlee: 6,
   };
+
+  const [gameMode, setGameMode] = useState("Wordle");
+  const [wordLength, setWordLength] = useState(gameModes["Wordle"]);
+  const [validGuesses, setValidGuesses] = useState(null);
+  const [solution, setSolution] = useState(null);
 
   useEffect(() => {
     fetchData(gameMode).then((data) => {
@@ -29,15 +29,12 @@ const GameModeProvider = ({ children }) => {
         console.log("solution", data.solution);
       }
     });
-  }, [gameMode]);
+  }, [gameMode, wordLength]);
 
-  const toggleGameMode = (newGameMode) =>
-    setGameMode((prev) => {
-      if (prev !== newGameMode) {
-        setWordLength(gameModes[newGameMode]);
-        return newGameMode;
-      }
-    });
+  const toggleGameMode = (newGameMode) => {
+    setGameMode(newGameMode);
+    setWordLength(gameModes[newGameMode]);
+  };
 
   return (
     <GameModeContext.Provider
