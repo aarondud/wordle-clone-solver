@@ -6,14 +6,9 @@ const ThemeContext = createContext({
 });
 
 const ThemeProvider = ({ children }) => {
-  const [darkTheme, setTheme] = useState(false);
-
-  useEffect(() => {
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    setTheme(prefersDark);
-  }, []);
+  const [darkTheme, setTheme] = useState(
+    () => window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
 
   const toggleTheme = () => setTheme((prev) => !prev);
 
