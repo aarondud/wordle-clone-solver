@@ -137,6 +137,10 @@ body * {
     animation-delay: 0.8s;
 }
 
+.tile:nth-child(6) {
+    animation-delay: 1s;
+}
+
 .tile.filled {
     animation: bounce 0.2s ease-in-out forwards;
 }
