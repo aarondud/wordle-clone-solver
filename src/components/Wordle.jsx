@@ -1,13 +1,14 @@
 import React, { useEffect, useContext } from "react";
 import useWordle from "../hooks/useWordle";
-import Grid from "./Grid/Grid";
+import Grid from "./Body/Grid";
 import Keyboard from "./Keyboard/Keyboard";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { GameModeContext } from "../contexts/GameModeContext";
+import { LastPage } from "@mui/icons-material";
 
-const Wordle = ({ setShowModal, setModalType }) => {
+const Wordle = ({ updateModalType, toggleModal }) => {
   const { darkTheme } = useContext(ThemeContext);
-  const { maxAttempts } = useContext(GameModeContext);
+  const { wordLength, maxAttempts } = useContext(GameModeContext);
 
   const {
     currentGuess,
@@ -31,14 +32,14 @@ const Wordle = ({ setShowModal, setModalType }) => {
       }, 2000);
 
       setTimeout(() => {
-        setModalType("win");
-        setShowModal(true);
+        updateModalType("win");
+        toggleModal();
       }, 4000);
     }
 
     if (attemptNo >= maxAttempts) {
-      setModalType("lose");
-      setTimeout(() => setShowModal(true), 4000);
+      updateModalType("lose");
+      setTimeout(() => toggleModal(), 1000);
     }
 
     return () => window.removeEventListener("keyup", handleKeyUp);

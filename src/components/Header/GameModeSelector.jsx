@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import useWordle from "../../hooks/useWordle";
 import { GameModeContext } from "../../contexts/GameModeContext";
 
 export default function GameModeSelector() {
@@ -48,15 +47,14 @@ export default function GameModeSelector() {
 
 function DropDownItem({ newGameMode, className }) {
   const { darkTheme } = useContext(ThemeContext);
-  const { gameMode } = useContext(GameModeContext);
-  const { newGame } = useWordle();
+  const { gameMode, toggleGameMode } = useContext(GameModeContext);
 
   return (
     <button
       className={`dropdown-item  ${
         gameMode === newGameMode ? "current" : ""
       } ${className} ${darkTheme ? "dark" : ""}`}
-      onClick={() => gameMode !== newGameMode && newGame(newGameMode)}
+      onClick={() => gameMode !== newGameMode && toggleGameMode(newGameMode)}
     >
       {newGameMode}
     </button>

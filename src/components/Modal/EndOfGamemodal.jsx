@@ -1,11 +1,10 @@
-import useWordle from "../../hooks/useWordle";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { GameModeContext } from "../../contexts/GameModeContext";
 
 const EndOfGameModal = ({ modalType, isModalVisible, setIsModalVisible }) => {
   const { darkTheme } = useContext(ThemeContext);
-  const { solution } = useContext(GameModeContext);
+  const { solution, toggleGameMode } = useContext(GameModeContext);
   const attemptNo = "placeholder"; // TODO this should be in game context
 
   return (
@@ -48,15 +47,15 @@ const EndOfGameModal = ({ modalType, isModalVisible, setIsModalVisible }) => {
     </div>
   );
 };
-
 const NewGameButton = ({ gameMode, setIsModalVisible }) => {
-  const { newGame } = useWordle();
+  const { toggleGameMode } = useContext(GameModeContext);
+
   return (
     <button
       className="new-game-button"
       onClick={() => {
         setIsModalVisible(false);
-        newGame(gameMode);
+        toggleGameMode(gameMode);
       }}
     >
       {gameMode}

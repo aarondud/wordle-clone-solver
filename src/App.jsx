@@ -10,23 +10,31 @@ function App() {
   const [modalType, setModalType] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const updateModalType = (type) => {
+    setModalType(type);
+  };
+
   return (
-    <ThemeProvider>
-      <GameModeProvider>
+    <GameModeProvider>
+      <ThemeProvider>
         <div className="App">
-          <Header setShowModal={setShowModal} setModalType={setModalType} />
-          <Wordle setShowModal={setShowModal} setModalType={setModalType} />
+          <Header toggleModal={toggleModal} updateModalType={updateModalType} />
+          <Wordle toggleModal={toggleModal} updateModalType={updateModalType} />
           <Footer />
           {showModal && (
             <Modal
               modalType={modalType}
               showModal={showModal}
-              setShowModal={setShowModal}
+              toggleModal={toggleModal}
             />
           )}
         </div>
-      </GameModeProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </GameModeProvider>
   );
 }
 
