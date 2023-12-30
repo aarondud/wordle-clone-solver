@@ -1,5 +1,5 @@
-import React, { createContext, useState, useMemo, useEffect } from "react";
-import { fetchData } from "../utils/dataFetcher.js";
+import React, { createContext, useState, useEffect } from "react";
+import { fetchAllData } from "../utils/dataFetcher.js";
 import useWordle from "../hooks/useWordle.jsx";
 
 const GameModeContext = createContext({
@@ -12,57 +12,49 @@ const GameModeContext = createContext({
   setWordLength: () => {},
 });
 
-const GameModeProvider = React.memo(({ children }) => {
-  const gameModes = {
-    Wordl: 4,
-    Wordle: 5,
-    Wordlee: 6,
-  };
-
+const GameModeProvider = ({ children }) => {
   const [gameMode, setGameMode] = useState("Wordle");
-  const [wordLength, setWordLength] = useState(gameModes["Wordle"]);
-  const [solution, setSolution] = useState(null);
+  const [wordLength, setWordLength] = useState(5);
+  const [gameData, setGameData] = useState(null);
   const [validGuesses, setValidGuesses] = useState(null);
-  const { newGame } = useWordle();
+  const [solution, setSolution] = useState(null);
 
-  /*
-  const [validGuesses, setValidGuesses] = useState(() => {
-    fetchData(gameMode).then((data) => {
-      if (data) {
-        return data.words;
-      }
-    });
-  });
-  const [solution, setSolution] = useState(() => {
-    fetchData(gameMode).then((data) => {
-      if (data) {
-        console.log("initial solution", data.solution);
-        return data.solution;
-      }
-    });
-  });
-  */
+  const { newGame, isCorrect } = useWordle();
 
   useEffect(() => {
-    //console.log("Fetching data...");
-    fetchData(gameMode).then((data) => {
-      if (data) {
-        setValidGuesses(data.words);
-        setSolution(data.solution);
-        console.log("solution", data.solution);
-        console.log("solution", data.solution);
-        console.log("Post-fetch state:");
-        console.log("gameMode:", gameMode);
-        console.log("wordLength:", wordLength);
+    // load data
+    const fetchGameData = async () => {
+      try {
+        const fetchedGameData = await fetchAllData();
+        if (fetchedGameData) {
+          setGameData(fetchedGameData);
+        }
+      } catch (error) {
+        console.error("fetchAndUpdataData Error:", error);
       }
-    });
-  }, [gameMode]);
-  //}, [resetGameFlag **OR** gameMode, wordLength]); // TODO need to rerun - even when
+    };
+    fetchGameData();
+  }, []);
+
+  useEffect(() => {
+    // when data is loaded, set wordLength, validGuesses, and solution
+    switchGameMode(gameMode);
+  }, [gameData]);
+
+  const switchGameMode = (newGameMode) => {
+    if (gameData) {
+      setWordLength(gameData[newGameMode].wordLength);
+      setValidGuesses(gameData[newGameMode].validGuesses);
+      setSolution(gameData[newGameMode].solution);
+    } else {
+      console.warn(`Game mode data not available for "${newGameMode}"`);
+    }
+  };
 
   const toggleGameMode = (newGameMode) => {
     newGame(newGameMode);
     setGameMode(newGameMode);
-    setWordLength(gameModes[newGameMode]);
+    switchGameMode(newGameMode);
   };
 
   return (
@@ -81,6 +73,6 @@ const GameModeProvider = React.memo(({ children }) => {
       {children}
     </GameModeContext.Provider>
   );
-});
+};
 
 export { GameModeContext, GameModeProvider };
