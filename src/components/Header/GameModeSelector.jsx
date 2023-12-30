@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { GameModeContext } from "../../contexts/GameModeContext";
@@ -6,17 +6,21 @@ import { GameModeContext } from "../../contexts/GameModeContext";
 export default function GameModeSelector() {
   const { darkTheme } = useContext(ThemeContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const gameModeSelectorRef = useRef(null);
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
   useEffect(() => {
     const handleClickOutsideMenu = (event) => {
-      if (dropdownOpen && !menuContainer.contains(event.target)) {
+      if (
+        dropdownOpen &&
+        gameModeSelectorRef.current &&
+        !gameModeSelectorRef.current.contains(event.target)
+      ) {
         setDropdownOpen(false);
       }
     };
 
-    const menuContainer = document.querySelector(".menu-container");
     document.body.addEventListener("click", handleClickOutsideMenu);
 
     return () => {
@@ -25,10 +29,10 @@ export default function GameModeSelector() {
   }, [dropdownOpen]);
 
   return (
-    <div className="menu-container">
+    <div className="game-mode-selector" ref={gameModeSelectorRef}>
       <div
         className={`icon menu-trigger ${dropdownOpen ? "inverted" : ""}`}
-        onClick={() => toggleDropdown()}
+        onClick={toggleDropdown}
       >
         <ArrowDropDownCircleIcon />
       </div>
@@ -39,7 +43,7 @@ export default function GameModeSelector() {
       >
         <DropDownItem newGameMode={"Wordl"} className="top-radius" />
         <DropDownItem newGameMode={"Wordle"} className="no-radius" />
-        <DropDownItem newGameMode={"Worldee"} className="bottom-radius" />
+        <DropDownItem newGameMode={"Wordlee"} className="bottom-radius" />
       </div>
     </div>
   );

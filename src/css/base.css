@@ -328,6 +328,7 @@ li {
     cursor: pointer;
     scale: 1.3;
     color: var(--primary);
+    outline: none;
 }
 
 .icon.inverted {
@@ -364,7 +365,7 @@ li {
 }
 
 /* Dropdown menu */
-.menu-container {
+.game-mode-selector {
     position: relative;
     transition: all 0.00000001s ease-in;
 }
