@@ -3,6 +3,7 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 
 const Tile = ({ letter, color, filled, past }) => {
   const { darkTheme } = useContext(ThemeContext);
+
   return (
     <div
       className={`tile ${filled ? "filled" : ""} ${past ? "past" : ""} ${

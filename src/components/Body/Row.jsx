@@ -8,6 +8,8 @@ export default function Row({ guess, currentGuess, isInvalid }) {
   const { wordLength } = useContext(GameModeContext);
 
   if (guess) {
+    //past guess
+
     return (
       <div className={`row past ${darkTheme ? "dark" : ""}`}>
         {guess.map((letter, index) => (
@@ -18,6 +20,8 @@ export default function Row({ guess, currentGuess, isInvalid }) {
   }
 
   if (currentGuess) {
+    // current guess
+
     let letters = currentGuess.split("");
     return (
       <div
@@ -34,18 +38,22 @@ export default function Row({ guess, currentGuess, isInvalid }) {
             isCurrent
           />
         ))}
-        {[...Array(wordLength - letters.length)].map((_, index) => (
-          <Tile key={index} />
-        ))}
+        <EmptyTiles numberTiles={wordLength - letters.length} />
       </div>
     );
   }
 
   return (
+    // remaining guesses
+
     <div className={`row ${darkTheme ? "dark" : ""}`}>
-      {Array.from({ length: wordLength }, (_, index) => (
-        <Tile key={index} />
-      ))}
+      <EmptyTiles numberTiles={wordLength} />
     </div>
   );
 }
+
+const EmptyTiles = ({ numberTiles }) => {
+  return Array.from({ length: numberTiles }, (_, index) => (
+    <Tile key={index} />
+  ));
+};
