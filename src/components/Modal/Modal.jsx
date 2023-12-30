@@ -3,6 +3,8 @@ import HelperModal from "./HelperModal";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import EndOfGameModal from "./EndOfGamemodal";
 
+const MODAL_TRANSITION_TIME = 300;
+
 const Modal = ({ modalType, showModal, toggleModal }) => {
   const { darkTheme } = useContext(ThemeContext);
   const [isModalVisible, setIsModalVisible] = useState(null);
@@ -17,7 +19,7 @@ const Modal = ({ modalType, showModal, toggleModal }) => {
   useEffect(() => {
     // workaround conditional rendering to trigger animations
     if (isModalVisible === false) {
-      setTimeout(() => toggleModal(), 300);
+      setTimeout(() => toggleModal(), MODAL_TRANSITION_TIME);
     }
   }, [isModalVisible]);
 

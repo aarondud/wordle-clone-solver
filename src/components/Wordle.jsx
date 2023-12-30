@@ -4,7 +4,10 @@ import Grid from "./Body/Grid";
 import Keyboard from "./Keyboard/Keyboard";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { GameModeContext } from "../contexts/GameModeContext";
-import { LastPage } from "@mui/icons-material";
+
+const WATERFALL_TIMEOUT = 2000;
+const WIN_TIMEOUT = 4000;
+const LOSE_TIMEOUT = 2000;
 
 const Wordle = ({ updateModalType, toggleModal }) => {
   const { darkTheme } = useContext(ThemeContext);
@@ -27,19 +30,20 @@ const Wordle = ({ updateModalType, toggleModal }) => {
       const rowElements = document.querySelectorAll(".row.past");
       const winningRow = Array.from(rowElements).pop();
       const tiles = Array.from(winningRow.querySelectorAll(".tile"));
+
       setTimeout(() => {
         tiles.map((tileElement) => tileElement.classList.add("waterfall"));
-      }, 2000);
+      }, WATERFALL_TIMEOUT);
 
       setTimeout(() => {
         updateModalType("win");
         toggleModal();
-      }, 4000);
+      }, WIN_TIMEOUT);
     }
 
     if (attemptNo >= maxAttempts) {
       updateModalType("lose");
-      setTimeout(() => toggleModal(), 1000);
+      setTimeout(() => toggleModal(), LOSE_TIMEOUT);
     }
 
     return () => window.removeEventListener("keyup", handleKeyUp);
