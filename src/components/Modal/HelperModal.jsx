@@ -61,13 +61,17 @@ const HelperModal = ({ isModalVisible, setIsModalVisible }) => {
       <hr />
       <h3>Run the Solving Bot.</h3>
       <p>Select the "Solve" bar to see the solving algorithms in action.</p>
-      <ul>
-        <li>Algo 1: desc... </li>
-        <li>Algo 2: desc... </li>
-        <li>Algo 3: desc... </li>
-      </ul>
+      <AlgorithmList />
     </div>
   );
+};
+
+const AlgorithmList = () => {
+  <ul>
+    <li>Algo 1: desc... </li>
+    <li>Algo 2: desc... </li>
+    <li>Algo 3: desc... </li>
+  </ul>;
 };
 
 export default HelperModal;
