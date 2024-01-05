@@ -1,63 +1,34 @@
-import React, { useEffect, useContext } from "react";
-import useWordle from "../hooks/useWordle";
+import React, { useEffect, useContext, useState } from "react";
 import Grid from "./Body/Grid";
 import Keyboard from "./Keyboard/Keyboard";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { GameModeContext } from "../contexts/GameModeContext";
 
-const WATERFALL_TIMEOUT = 2000;
-const WIN_TIMEOUT = 4000;
-const LOSE_TIMEOUT = 2000;
-
-const Wordle = ({ updateModalType, toggleModal }) => {
+const Wordle = ({ updateModalType, setShowModal }) => {
   const { darkTheme } = useContext(ThemeContext);
-  const { wordLength, maxAttempts } = useContext(GameModeContext);
-
-  const {
-    currentGuess,
-    guesses,
-    isCorrect,
-    attemptNo,
-    usedKeys,
-    handleKeyUp,
-    isInvalid,
-  } = useWordle();
+  const { maxAttempts, isCorrect, attemptNo, handleKeyUp } =
+    useContext(GameModeContext);
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyUp);
 
     if (isCorrect) {
-      const rowElements = document.querySelectorAll(".row.past");
-      const winningRow = Array.from(rowElements).pop();
-      const tiles = Array.from(winningRow.querySelectorAll(".tile"));
-
-      setTimeout(() => {
-        tiles.map((tileElement) => tileElement.classList.add("waterfall"));
-      }, WATERFALL_TIMEOUT);
-
-      setTimeout(() => {
-        updateModalType("win");
-        toggleModal();
-      }, WIN_TIMEOUT);
+      window.removeEventListener("keyup", handleKeyUp);
+      updateModalType("win");
+      setShowModal(true);
     }
-
     if (attemptNo >= maxAttempts) {
       updateModalType("lose");
-      setTimeout(() => toggleModal(), LOSE_TIMEOUT);
+      setShowModal(true);
     }
 
     return () => window.removeEventListener("keyup", handleKeyUp);
-  }, [handleKeyUp, isCorrect, attemptNo]);
+  }, [handleKeyUp]);
 
   return (
     <div className={`wordle ${darkTheme ? "dark" : ""}`}>
-      <Grid
-        currentGuess={currentGuess}
-        guesses={guesses}
-        attemptNo={attemptNo}
-        isInvalid={isInvalid}
-      />
-      <Keyboard usedKeys={usedKeys} handleKeyUp={handleKeyUp} />
+      <Grid />
+      <Keyboard />
     </div>
   );
 };

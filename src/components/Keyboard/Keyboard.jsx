@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Key from "./Key";
+import { GameModeContext } from "../../contexts/GameModeContext";
 
-export default function Keyboard({ usedKeys, handleKeyUp }) {
+export default function Keyboard() {
+  const { usedKeys, handleKeyUp } = useContext(GameModeContext);
   const keyboardLayout = [
     "qwertyuiopasdfghjkl".split(""),
     ["Enter"],
@@ -9,7 +11,7 @@ export default function Keyboard({ usedKeys, handleKeyUp }) {
     ["⌫"],
   ];
 
-  const renderRow = (row, rowIndex) =>
+  const renderKeyRow = (row, rowIndex) =>
     row.map((letter, keyIndex) => (
       <Key
         key={`${rowIndex}-${keyIndex}`}
@@ -19,9 +21,5 @@ export default function Keyboard({ usedKeys, handleKeyUp }) {
       />
     ));
 
-  return (
-    <div className="keyboard">
-      {keyboardLayout.map((row, rowIndex) => renderRow(row, rowIndex))}
-    </div>
-  );
+  return <div className="keyboard">{keyboardLayout.map(renderKeyRow)}</div>;
 }

@@ -37,28 +37,45 @@ export default function GameModeSelector() {
         <ArrowDropDownCircleIcon />
       </div>
       <div
-        className={`dropdown-menu ${dropdownOpen ? "active" : "inactive"} ${
+        className={`dropdown-menu ${dropdownOpen ? "active" : ""} ${
           darkTheme ? "dark" : ""
         }`}
       >
-        <DropDownItem newGameMode={"Wordl"} className="top-radius" />
-        <DropDownItem newGameMode={"Wordle"} className="no-radius" />
-        <DropDownItem newGameMode={"Wordlee"} className="bottom-radius" />
+        <DropDownItem
+          newGameMode={"Wordl"}
+          className="top-radius"
+          setDropDownOpen={setDropdownOpen}
+        />
+        <DropDownItem
+          newGameMode={"Wordle"}
+          className="no-radius"
+          setDropDownOpen={setDropdownOpen}
+        />
+        <DropDownItem
+          newGameMode={"Wordlee"}
+          className="bottom-radius"
+          setDropDownOpen={setDropdownOpen}
+        />
       </div>
     </div>
   );
 }
 
-function DropDownItem({ newGameMode, className }) {
+function DropDownItem({ newGameMode, className, setDropDownOpen }) {
   const { darkTheme } = useContext(ThemeContext);
-  const { gameMode, toggleGameMode } = useContext(GameModeContext);
+  const { gameMode, newGame } = useContext(GameModeContext);
 
   return (
     <button
       className={`dropdown-item  ${
         gameMode === newGameMode ? "current" : ""
       } ${className} ${darkTheme ? "dark" : ""}`}
-      onClick={() => gameMode !== newGameMode && toggleGameMode(newGameMode)}
+      onClick={() => {
+        if (gameMode !== newGameMode) {
+          newGame(newGameMode);
+          setDropDownOpen(false);
+        }
+      }}
     >
       {newGameMode}
     </button>
