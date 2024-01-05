@@ -15,7 +15,6 @@
 /* General styles */
 .wordle.dark {
     background-color: var(--background-dark);
-    color: var(--text-dark);
 }
 
 
@@ -26,14 +25,14 @@
     color: var(--text-dark);
 }
 
-.tile.past.dark {
-    border: 1px solid var(--filled-border-dark);
+.tile.filled.dark {
+    border-color: var(--filled-border-dark);
+    color: var(--text-dark);
 }
 
-.tile.waterfall.dark {
-    background: var(--green-color);
-    border-color: var(--green-color);
-    color: var(--text-dark);
+.tile.past.dark {
+    border: 1px solid var(--filled-border-dark);
+    --color: var(--text-dark);
 }
 
 
@@ -65,16 +64,13 @@
 /* Navbar styles */
 .navbar.dark {
     background-color: var(--background-dark);
+    /* color: var(--text-dark); */
+}
+
+.social-icons.dark,
+.icons.dark,
+.title.dark {
     color: var(--text-dark);
-}
-
-.icon.dark {
-    color: primary;
-}
-
-.mui-icon.dark {
-    background-color: transparent;
-    border-color: transparent;
 }
 
 
@@ -82,6 +78,7 @@
 .invalid-popup.dark {
     background-color: var(--background-dark);
     box-shadow: var(--shadow-dark);
+    color: var(--text-dark);
 }
 
 

@@ -1,39 +1,38 @@
-@import "../css/base.css";
-@import "../css/dark.css";
-
-
 /* Keyframe animations */
 @keyframes flip {
     0% {
         transform: rotateX(0);
-        background: inherit;
+        background-color: inherit;
         border-color: inherit;
+        color: var(--color);
     }
 
     45% {
         transform: rotateX(90deg);
-        background: inherit;
+        background-color: inherit;
         border-color: inherit;
+        color: var(--color);
     }
 
     55% {
         transform: rotateX(90deg);
         background: var(--background);
         border-color: var(--border-color);
+        color: var(--keyboard-text-selected);
     }
 
     100% {
         transform: rotateX(0deg);
         background: var(--background);
         border-color: var(--border-color);
-        color: #eee;
+        color: var(--keyboard-text-selected);
     }
 }
+
 
 @keyframes bounce {
     0% {
         transform: scale(1);
-        border-color: inherit;
     }
 
     50% {
@@ -42,7 +41,7 @@
 
     100% {
         transform: scale(1);
-        border-color: var(--filled-border-color);
+        border-color: inherit;
     }
 }
 
@@ -69,7 +68,7 @@
     }
 }
 
-@keyframes up-down {
+@keyframes waterfall {
 
     0%,
     100% {
@@ -82,5 +81,28 @@
 
     80% {
         transform: translateY(10px);
+    }
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(0px);
     }
 }

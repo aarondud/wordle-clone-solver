@@ -2,7 +2,7 @@ import React from "react";
 
 const Key = ({ letter, color, onClick }) => (
   <div
-    className={`key ${color} hover-clickable ${
+    className={`key ${color} ${
       letter === "⌫" || letter === "Enter" ? "big" : ""
     }`}
     key={letter}

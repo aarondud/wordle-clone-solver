@@ -23,6 +23,7 @@
     --yellow-color: #e2cc68;
 }
 
+
 /* Custom Wordle font */
 @font-face {
     font-family: 'NYT Karnak Condensed';
@@ -39,10 +40,11 @@ body {
     font-size: 1em;
     font-family: verdana;
     margin: 0 0 0 0;
+
 }
 
 body * {
-    transition: all 0.3s ease-in;
+    transition: background-color 0.3s ease-in, border 0.3s ease-in;
 }
 
 .App {
@@ -53,7 +55,6 @@ body * {
 
 .wordle {
     background-color: var(--background-light);
-    color: var(--text-light);
     flex: 1;
 }
 
@@ -65,6 +66,12 @@ body * {
     align-items: center;
     justify-content: center;
     padding-top: 20px;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.fade-in-grid {
+    animation: fadeIn 0.3s ease-in;
 }
 
 .row {
@@ -82,7 +89,8 @@ body * {
     width: 60px;
     height: 60px;
     background-color: var(--background-light);
-    border: 1px solid var(--border-light);
+    border: 1px solid;
+    border-color: var(--border-light);
     color: var(--text-light);
     margin: 4px;
     text-align: center;
@@ -99,51 +107,58 @@ body * {
 .tile.green {
     --background: var(--green-color);
     --border-color: var(--green-color);
+    --color: var(var(--text-light));
     animation: flip 0.5s ease forwards;
 }
 
 .tile.grey {
     --background: var(--grey-color);
     --border-color: var(--grey-color);
+    --color: var(var(--text-light));
     animation: flip 0.5s ease forwards;
 }
 
 .tile.yellow {
     --background: var(--yellow-color);
     --border-color: var(--yellow-color);
+    --color: var(var(--text-light));
     animation: flip 0.5s ease forwards;
 }
 
-.tile.waterfall {
-    animation: up-down 0.4s ease-in-out;
-    background: var(--green-color);
-    border-color: var(--green-color);
-    color: var(--text-dark);
+.tile.correct {
+    --background: var(--green-color);
+    --border-color: var(--green-color);
+    animation: flip 0.5s ease forwards, waterfall 0.5s ease forwards;
+}
+
+.tile:nth-child(1) {
+    animation-delay: 0s, 1.8s;
 }
 
 .tile:nth-child(2) {
-    animation-delay: 0.2s;
+    animation-delay: 0.2s, 2s;
 }
 
 .tile:nth-child(3) {
-    animation-delay: 0.4s;
+    animation-delay: 0.4s, 2.2s;
 }
 
 .tile:nth-child(4) {
-    animation-delay: 0.6s;
+    animation-delay: 0.6s, 2.4s;
 }
 
 .tile:nth-child(5) {
-    animation-delay: 0.8s;
+    animation-delay: 0.8s, 2.6s;
 }
 
 .tile:nth-child(6) {
-    animation-delay: 1s;
+    animation-delay: 1s, 2.8s;
 }
 
 .tile.filled {
     animation: bounce 0.2s ease-in-out forwards;
 }
+
 
 /* Keyboard styles */
 .keyboard {
@@ -165,6 +180,11 @@ body * {
     transition: all 0.3s ease-in;
 }
 
+.key:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
 .key.big {
     width: 65px;
 }
@@ -172,7 +192,6 @@ body * {
 .key.green {
     background: var(--green-color);
     color: var(--keyboard-text-selected);
-
 }
 
 .key.yellow {
@@ -208,6 +227,7 @@ body * {
     box-shadow: 2px 2px 10px var(--modal-shadow-light);
     user-select: none;
     cursor: default;
+
 }
 
 .modal-overlay,
@@ -292,13 +312,14 @@ li {
     border-radius: 100px
 }
 
+
 /* Navabr styles */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: var(--background-light);
-    color: var(--text-light);
+    /* color: var(--text-light); */
     border-bottom: 1px solid var(--border-light);
     padding-top: 5px;
 }
@@ -312,14 +333,31 @@ li {
     cursor: default;
     user-select: none;
     letter-spacing: 0.75px;
-    transition: 0.00000001s ease-in;
+}
+
+.social-icons,
+.icons,
+.title {
+    color: var(--text-light);
+}
+
+.title-char {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease-in;
+
 }
 
 .social-icons,
 .icons {
     display: flex;
     align-items: center;
-    transition: none;
 }
 
 .icon {
@@ -329,11 +367,22 @@ li {
     scale: 1.3;
     color: var(--primary);
     outline: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+}
+
+.memoji-icon {
+    width: 25px;
+    height: 25px;
 }
 
 .icon.inverted {
     transform: rotate(180deg);
 }
+
 
 /* Invalid pop-up */
 .invalid-popup {
@@ -345,29 +394,18 @@ li {
     padding: 10px;
     background-color: var(--background-light);
     box-shadow: 2px 2px 10px var(--modal-shadow-light);
+    color: var(--text-light);
     order: 1;
     z-index: 10;
-    display: none;
-    opacity: 0;
+    display: block;
+    opacity: 1;
     transition: opacity 0.5s ease-in-out;
 }
 
-.invalid-popup.visible {
-    display: block;
-    opacity: 1;
-    transition: opacity 1s ease-in-out;
-}
-
-
-/* Cursor styles */
-.hover-clickable {
-    cursor: pointer;
-}
 
 /* Dropdown menu */
 .game-mode-selector {
     position: relative;
-    transition: all 0.00000001s ease-in;
 }
 
 .dropdown-menu {
@@ -378,19 +416,16 @@ li {
     border-radius: 10px;
     width: max-content;
     box-shadow: var(--shadow-light);
-    transition: opacity 500ms ease, transform 500ms ease;
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
 }
 
 .dropdown-menu.active {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-menu.inactive {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-20px);
+    transform: translateY(0px);
 }
 
 .dropdown-item {
@@ -404,6 +439,7 @@ li {
     font-family: 'NYT Karnak Condensed';
     font-size: 1em;
     cursor: pointer;
+    transition: background-color 0.1s ease;
 }
 
 .dropdown-item.current {
@@ -421,7 +457,6 @@ li {
 
 .dropdown-item:hover {
     background-color: var(--hover-background);
-    transition: 750ms ease;
 }
 
 .dropdown-item.current:hover {
@@ -442,4 +477,6 @@ li {
     font-size: 0.7em;
     background-color: var(--background-light);
     color: var(--text-light);
+    user-select: none;
+    cursor: default;
 }

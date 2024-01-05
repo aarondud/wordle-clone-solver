@@ -1,14 +1,10 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
-export default function InvalidPopup({ visible }) {
+export default function InvalidPopup() {
   const { darkTheme } = useContext(ThemeContext);
   return (
-    <div
-      className={`invalid-popup ${visible ? "visible" : ""} ${
-        darkTheme ? "dark" : ""
-      }`}
-    >
+    <div className={`invalid-popup ${darkTheme ? "dark" : ""}`}>
       Not in word list
     </div>
   );
