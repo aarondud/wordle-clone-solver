@@ -18,20 +18,29 @@ function App() {
     setModalType(type);
   };
 
+  const ModalHandler = () => {
+    return (
+      showModal && (
+        <Modal
+          modalType={modalType}
+          showModal={showModal}
+          toggleModal={toggleModal}
+        />
+      )
+    );
+  };
+
   return (
     <GameModeProvider>
       <ThemeProvider>
         <div className="App">
           <Header toggleModal={toggleModal} updateModalType={updateModalType} />
-          <Wordle toggleModal={toggleModal} updateModalType={updateModalType} />
+          <Wordle
+            updateModalType={updateModalType}
+            setShowModal={setShowModal}
+          />
           <Footer />
-          {showModal && (
-            <Modal
-              modalType={modalType}
-              showModal={showModal}
-              toggleModal={toggleModal}
-            />
-          )}
+          {<ModalHandler />}
         </div>
       </ThemeProvider>
     </GameModeProvider>
