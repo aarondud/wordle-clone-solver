@@ -1,4 +1,4 @@
-/* Dark theme styles */
+/* Dark theme colours */
 :root {
     --background-dark: #333;
     --border-dark: #555;
@@ -9,6 +9,8 @@
 
     --empty-border-dark: #ddd;
     --filled-border-dark: #ddd;
+
+    --hover-background-dark: #5d5d5d;
 }
 
 
@@ -60,11 +62,14 @@
     color: var(--text-dark);
 }
 
+.new-game-button.dark:hover {
+    background-color: var(--grey-color);
+}
+
 
 /* Navbar styles */
 .navbar.dark {
     background-color: var(--background-dark);
-    /* color: var(--text-dark); */
 }
 
 .social-icons.dark,
@@ -93,13 +98,15 @@
     color: var(--text-dark)
 }
 
-.dropdown-item.current.dark {
+.dropdown-item.current.dark,
+.dropdown-item.current.dark:hover {
     background-color: var(--grey-color);
 }
 
 .dropdown-item.dark:hover {
-    background-color: var(--hover-background);
+    background-color: var(--hover-background-dark);
 }
+
 
 /* Footer */
 .footer.dark {

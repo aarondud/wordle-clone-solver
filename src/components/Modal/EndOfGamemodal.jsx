@@ -58,10 +58,11 @@ const EndOfGameModal = ({ modalType, isModalVisible, exitModal }) => {
 };
 const NewGameButton = ({ gameMode, exitModal }) => {
   const { newGame } = useContext(GameModeContext);
+  const { darkTheme } = useContext(ThemeContext);
 
   return (
     <button
-      className="new-game-button"
+      className={`new-game-button ${darkTheme ? "dark" : ""}`}
       onClick={() => {
         exitModal();
         newGame(gameMode);
