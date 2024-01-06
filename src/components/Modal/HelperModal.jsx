@@ -3,7 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { GameModeContext } from "../../contexts/GameModeContext";
 
-const HelperModal = ({ isModalVisible, setIsModalVisible }) => {
+const HelperModal = ({ isModalVisible, exitModal }) => {
   const { darkTheme } = useContext(ThemeContext);
   const { gameMode, wordLength } = useContext(GameModeContext);
   const modalContent = useRef(null);
@@ -12,7 +12,7 @@ const HelperModal = ({ isModalVisible, setIsModalVisible }) => {
     // clicking outside of modal-content closes modal
     const handleClickOutsideModal = (event) => {
       if (isModalVisible && !modalContent.current.contains(event.target)) {
-        setIsModalVisible(false);
+        exitModal();
       }
     };
 
@@ -33,7 +33,7 @@ const HelperModal = ({ isModalVisible, setIsModalVisible }) => {
     >
       <button
         className={`modal-exit-button ${darkTheme ? "dark" : ""}`}
-        onClick={() => setIsModalVisible(false)}
+        onClick={exitModal}
       >
         <CloseIcon />
       </button>

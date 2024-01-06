@@ -2,43 +2,63 @@ import React, { useContext, useState, useEffect } from "react";
 import HelperModal from "./HelperModal";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import EndOfGameModal from "./EndOfGamemodal";
+import { GameModeContext } from "../../contexts/GameModeContext";
 
-const MODAL_TRANSITION_TIME = 300;
+const EXIT_TRANSITION_TIME = 300;
+const WIN_TRANSITION_TIME = 3500;
+const LOSE_TRANSITION_TIME = 1500;
 
-const Modal = ({ modalType, showModal, toggleModal }) => {
+const Modal = ({ modalType, updateModalType, setShowModal }) => {
   const { darkTheme } = useContext(ThemeContext);
+  const { isCorrect, attemptNo, maxAttempts } = useContext(GameModeContext);
   const [isModalVisible, setIsModalVisible] = useState(null);
 
   useEffect(() => {
-    // workaround conditional rendering to trigger animations
-    if (showModal) {
+    if (modalType === "helper") {
       setIsModalVisible(true);
+    } else if (modalType === "win") {
+      winModalOpen();
+    } else {
+      loseModalOpen();
     }
-  }, [showModal]);
+  }, []);
 
-  useEffect(() => {
-    // workaround conditional rendering to trigger animations
-    if (isModalVisible === false) {
-      setTimeout(() => toggleModal(), MODAL_TRANSITION_TIME);
-    }
-  }, [isModalVisible]);
+  const exitModal = () => {
+    setIsModalVisible(false);
+    setTimeout(() => {
+      setShowModal(false);
+      updateModalType(null);
+    }, EXIT_TRANSITION_TIME);
+  };
+
+  const winModalOpen = () => {
+    setTimeout(() => setIsModalVisible(isCorrect), WIN_TRANSITION_TIME);
+  };
+
+  const loseModalOpen = () => {
+    setTimeout(
+      () => setIsModalVisible(attemptNo >= maxAttempts),
+      LOSE_TRANSITION_TIME
+    );
+  };
 
   return (
     <div
-      className={`modal-overlay ${isModalVisible ? "visible" : ""} ${
-        darkTheme ? "dark" : ""
-      }`}
+      className={`modal-overlay ${modalType} ${
+        isModalVisible ? "visible" : ""
+      } ${darkTheme ? "dark" : ""}`}
     >
       {modalType === "helper" ? (
         <HelperModal
           isModalVisible={isModalVisible}
           setIsModalVisible={setIsModalVisible}
+          exitModal={exitModal}
         />
       ) : (
         <EndOfGameModal
           modalType={modalType}
           isModalVisible={isModalVisible}
-          setIsModalVisible={setIsModalVisible}
+          exitModal={exitModal}
         />
       )}
     </div>

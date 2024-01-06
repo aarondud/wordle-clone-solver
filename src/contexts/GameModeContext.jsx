@@ -25,8 +25,6 @@ const GameModeProvider = ({ children }) => {
   const [wordLength, setWordLength] = useState(5);
   const [validGuesses, setValidGuesses] = useState(null);
   const [solution, setSolution] = useState(null);
-
-  // useWordle states
   const [attemptNo, setAttemptNo] = useState(0);
   const [currentGuess, setCurrentGuess] = useState("");
   const [guesses, setGuesses] = useState([...Array(maxAttempts)]);
@@ -35,7 +33,6 @@ const GameModeProvider = ({ children }) => {
   const [usedKeys, setUsedKeys] = useState({});
   const [isInvalid, setIsInvalid] = useState(null);
 
-  // useWordle body
   const formatGuess = () => {
     let solutionArray = [...solution];
     let formattedGuess = [...currentGuess].map((letter) => ({
