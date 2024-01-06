@@ -160,6 +160,29 @@ body * {
 }
 
 
+/* Solver button */
+.solver {
+    width: 500px;
+    height: 50px;
+    display: inline-block;
+
+    background: var(--keyboard-background);
+    color: var(--keyboard-text-unselected);
+    border-radius: 6px;
+
+    line-height: 50px;
+    font-weight: 600;
+
+    transition: all 0.3s ease-in;
+    user-select: none;
+}
+
+.solver:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+
 /* Keyboard styles */
 .keyboard {
     max-width: 500px;
