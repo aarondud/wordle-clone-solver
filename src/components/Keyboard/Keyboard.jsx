@@ -5,21 +5,26 @@ import { GameModeContext } from "../../contexts/GameModeContext";
 export default function Keyboard() {
   const { usedKeys, handleKeyUp } = useContext(GameModeContext);
   const keyboardLayout = [
-    "qwertyuiopasdfghjkl".split(""),
+    "qwertyuiop".split(""),
+    "asdfghjkl".split(""),
     ["Enter"],
     "zxcvbnm".split(""),
     ["⌫"],
   ];
 
-  const renderKeyRow = (row, rowIndex) =>
-    row.map((letter, keyIndex) => (
-      <Key
-        key={`${rowIndex}-${keyIndex}`}
-        letter={letter}
-        color={usedKeys[letter]}
-        onClick={() => handleKeyUp({ key: letter })}
-      />
-    ));
+  const renderKeyRow = (row, rowIndex) => (
+    <div className={`keyboard-row-${rowIndex}`} key={rowIndex}>
+      {row.map((letter, keyIndex) => (
+        <Key
+          className={`row-${rowIndex}`}
+          key={`${rowIndex}-${keyIndex}`}
+          letter={letter}
+          color={usedKeys[letter]}
+          onClick={() => handleKeyUp({ key: letter })}
+        />
+      ))}
+    </div>
+  );
 
   return <div className="keyboard">{keyboardLayout.map(renderKeyRow)}</div>;
 }

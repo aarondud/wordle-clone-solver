@@ -162,9 +162,10 @@ body * {
 
 /* Solver button */
 .solver {
-    width: 500px;
+    width: 495px;
+    max-width: 90%;
     height: 50px;
-    display: inline-block;
+    margin: 0 auto;
 
     background: var(--keyboard-background);
     color: var(--keyboard-text-unselected);
@@ -185,9 +186,25 @@ body * {
 
 /* Keyboard styles */
 .keyboard {
-    max-width: 500px;
+    max-width: 90%;
     margin: 20px auto;
     user-select: none;
+    display: inline;
+    justify-content: center;
+}
+
+.keyboard-row-2,
+.keyboard-row-3,
+.keyboard-row-4 {
+    display: inline-block
+}
+
+.keyboard-row-0 {
+    padding-top: 20px;
+}
+
+.keyboard-row-4 {
+    padding-bottom: 10px;
 }
 
 .key {
@@ -241,8 +258,9 @@ body * {
 .modal-content {
     position: relative;
     margin: 77.5px auto;
-    max-width: 400px;
-    max-height: 800px;
+    width: 400px;
+    max-width: 75%;
+    max-height: 75%;
     padding: 20px;
     border-radius: 10px;
     background: var(--background-light);
