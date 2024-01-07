@@ -44,6 +44,27 @@ const fetchAllData = async () => {
   }
 };
 
+const fetchData = async (gameMode) => {
+  try {
+    const gameData = {};
+    const guessesText = await fetchText(wordData[gameMode].guesses);
+    const solutionText = await fetchText(wordData[gameMode].solutions);
+    const randomIndex = Math.floor(Math.random() * solutionText.length);
+
+    gameData.gameMode = gameMode;
+    gameData.wordLength = wordData[gameMode].wordLength;
+    gameData.validGuesses = new Set(guessesText.filter((word) => word));
+    gameData.solution = solutionText[randomIndex].trim();
+
+    console.log(gameData);
+
+    return gameData;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 const fetchText = async (url) => {
   try {
     const response = await fetch(url);
@@ -60,4 +81,4 @@ const fetchText = async (url) => {
   }
 };
 
-export { fetchAllData };
+export { fetchData, fetchAllData };
