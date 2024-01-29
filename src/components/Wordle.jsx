@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import Grid from "./Body/Grid";
 import Keyboard from "./Keyboard/Keyboard";
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -7,10 +7,18 @@ import SolverButton from "./SolverButton";
 
 const Wordle = ({ updateModalType, setShowModal }) => {
   const { darkTheme } = useContext(ThemeContext);
-  const { maxAttempts, isCorrect, attemptNo, handleKeyUp } =
+  const { maxAttempts, isCorrect, attemptNo, handleKeyUp, solverOn } =
     useContext(GameModeContext);
 
   useEffect(() => {
+    if (solverOn) {
+      if (isCorrect) {
+        updateModalType("solver");
+        setShowModal(true);
+      }
+      return;
+    }
+
     window.addEventListener("keyup", handleKeyUp);
 
     if (isCorrect) {

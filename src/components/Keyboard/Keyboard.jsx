@@ -3,7 +3,7 @@ import Key from "./Key";
 import { GameModeContext } from "../../contexts/GameModeContext";
 
 export default function Keyboard() {
-  const { usedKeys, handleKeyUp } = useContext(GameModeContext);
+  const { usedKeys, handleKeyUp, solverOn } = useContext(GameModeContext);
   const keyboardLayout = [
     "qwertyuiop".split(""),
     "asdfghjkl".split(""),
@@ -20,7 +20,7 @@ export default function Keyboard() {
           key={`${rowIndex}-${keyIndex}`}
           letter={letter}
           color={usedKeys[letter]}
-          onClick={() => handleKeyUp({ key: letter })}
+          onClick={() => (solverOn ? null : handleKeyUp({ key: letter }))}
         />
       ))}
     </div>

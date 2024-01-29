@@ -16,6 +16,10 @@ const GameModeContext = createContext({
   setWordLength: () => {},
   handleKeyUp: () => {},
   newGame: () => {},
+  toggleSolver: () => {},
+  resetBoard: () => {},
+  solverOn: null,
+  setSolverOn: () => {},
 });
 
 const maxAttempts = 6;
@@ -33,6 +37,19 @@ const GameModeProvider = ({ children }) => {
   const [usedKeys, setUsedKeys] = useState({});
   const [isInvalid, setIsInvalid] = useState(null);
 
+  const [solverOn, setSolverOn] = useState(false);
+  // need to increase the size of guesses if go over - added push() functionality
+  // need to avoid the maxAttempts attemptNo setting to false - checkGameOver
+  // need to set the onscreen guess rendering using module -
+
+  const checkGameOver = () => {
+    if (solverOn) {
+      return false;
+    }
+
+    return attemptNo >= maxAttempts;
+  };
+
   const formatGuess = () => {
     let solutionArray = [...solution];
     let formattedGuess = [...currentGuess].map((letter) => ({
@@ -40,20 +57,17 @@ const GameModeProvider = ({ children }) => {
       color: "grey",
     }));
 
-    // find greens
     formattedGuess.forEach((letter, i) => {
       if (letter.key === solutionArray[i]) {
-        letter.color = "green"; // different
-        solutionArray[i] = null; //crossing out green here so yellow doesnt double
+        letter.color = "green";
+        solutionArray[i] = null; //cross out green here so yellow doesnt double
       }
     });
 
-    // find yellow
-    // TODO doubles of single letter still both yellow
     formattedGuess.forEach((letter) => {
       if (solutionArray.includes(letter.key) && letter.color !== "green") {
         letter.color = "yellow";
-        solutionArray[solutionArray.indexOf[letter.key]] = null; //crossing out here so yellow doesnt double
+        solutionArray[solutionArray.indexOf[letter.key]] = null; //cross out so doesnt double
       }
     });
     return formattedGuess;
@@ -65,7 +79,13 @@ const GameModeProvider = ({ children }) => {
     }
     setGuesses((prevGuesses) => {
       let newGuesses = [...prevGuesses];
-      newGuesses[attemptNo] = formattedGuess;
+
+      if (checkGameOver()) {
+        newGuesses.push(formattedGuess);
+      } else {
+        newGuesses[attemptNo] = formattedGuess;
+      }
+
       return newGuesses;
     });
 
@@ -103,12 +123,15 @@ const GameModeProvider = ({ children }) => {
   };
 
   const handleKeyUp = ({ key }) => {
-    if (isCorrect || attemptNo >= maxAttempts) {
+    if (isCorrect || checkGameOver()) {
       return;
     }
 
     if (key === "Enter") {
+      console.log("am i printing during solving.......");
+      console.log("solverOn", solverOn);
       if (
+        // (attemptNo < maxAttempts || solverOn) && // solverOn change here
         attemptNo < maxAttempts &&
         currentGuess.length == wordLength &&
         !history.includes(currentGuess)
@@ -148,6 +171,10 @@ const GameModeProvider = ({ children }) => {
     newGame("Wordle");
   }, []);
 
+  const toggleSolver = () => {
+    setSolverOn(!solverOn);
+  };
+
   const newGame = async (newGameMode) => {
     const gameData = await fetchGameData(newGameMode);
 
@@ -155,6 +182,18 @@ const GameModeProvider = ({ children }) => {
     setGameMode(newGameMode);
 
     // reset game
+    resetBoard();
+
+    // switch game mode
+    setWordLength(gameData.wordLength);
+    setValidGuesses(gameData.validGuesses);
+    setSolution(gameData.solution);
+
+    // solver mode
+    setSolverOn(false);
+  };
+
+  const resetBoard = () => {
     setAttemptNo(0);
     setCurrentGuess("");
     setGuesses([...Array(maxAttempts)]);
@@ -162,11 +201,6 @@ const GameModeProvider = ({ children }) => {
     setIsCorrect(false);
     setUsedKeys({});
     setIsInvalid(null);
-
-    // switch game mode
-    setWordLength(gameData.wordLength);
-    setValidGuesses(gameData.validGuesses);
-    setSolution(gameData.solution);
   };
 
   return (
@@ -185,6 +219,10 @@ const GameModeProvider = ({ children }) => {
         isInvalid,
         handleKeyUp,
         newGame,
+        solverOn,
+        toggleSolver,
+        setSolverOn,
+        resetBoard,
       }}
     >
       {children}
