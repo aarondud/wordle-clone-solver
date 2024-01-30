@@ -19,8 +19,8 @@ const EndOfGameModal = ({ modalType, isModalVisible, exitModal }) => {
         <h1>You Win!</h1>
         <hr />
         <p>
-          You found the solution in {attemptNoRef.current}{" "}
-          {attemptNoRef.current === 1 ? "guess" : "guesses"}.
+          Congratulations! You found the solution in {attemptNoRef.current}{" "}
+          {attemptNoRef.current === 1 ? "guess" : "guesses"} 🕵️‍♀️. You're a natural.
         </p>
         <h2>{solutionRef.current}</h2>
       </>
@@ -32,7 +32,7 @@ const EndOfGameModal = ({ modalType, isModalVisible, exitModal }) => {
       <>
         <h1>You Lose.</h1>
         <hr />
-        <p>The solution was:</p>
+        <p>Oops! It looks like you didn't crack the case this time 🕵️‍♀️. The solution was:</p>
         <h2>{solutionRef.current}</h2>
       </>
     );
@@ -47,7 +47,7 @@ const EndOfGameModal = ({ modalType, isModalVisible, exitModal }) => {
       {modalType === "win" ? renderWinModal() : null}
       {modalType === "lose" ? renderLoseModal() : null}
 
-      <p>Want to play again?</p>
+      <p>Ready for another round 🤔?</p>
       <div className="modal-buttons">
         <NewGameButton gameMode="Wordl" exitModal={exitModal} />
         <NewGameButton gameMode="Wordle" exitModal={exitModal} />
@@ -64,8 +64,8 @@ const NewGameButton = ({ gameMode, exitModal }) => {
     <button
       className={`new-game-button ${darkTheme ? "dark" : ""}`}
       onClick={() => {
-        exitModal();
         newGame(gameMode);
+        exitModal();
       }}
     >
       {gameMode}
