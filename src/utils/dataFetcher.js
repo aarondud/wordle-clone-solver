@@ -36,7 +36,7 @@ const fetchAllData = async () => {
         solution: solutionText[randomIndex].trim(),
       };
     }
-    console.log(gameData);
+    // console.log(gameData);
     return gameData;
   } catch (error) {
     console.error(error);
@@ -56,7 +56,7 @@ const fetchData = async (gameMode) => {
     gameData.validGuesses = new Set(guessesText.filter((word) => word));
     gameData.solution = solutionText[randomIndex].trim();
 
-    console.log(gameData);
+    // console.log(gameData);
 
     return gameData;
   } catch (error) {

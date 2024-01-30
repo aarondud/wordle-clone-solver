@@ -20,7 +20,7 @@ export default function Header({ setShowModal, updateModalType }) {
           className="memoji-icon"
         ></img>
       ),
-      link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      link: "https://aarondudley.vercel.app",
     },
     {
       icon: <GitHub />,
