@@ -39,39 +39,27 @@ const HelperModal = ({ isModalVisible, exitModal }) => {
       </button>
       <h1>How To Play</h1>
       <h3>
-        Guess the <p className="gameMode">{gameMode}</p> in 6 tries.
+        Guess the <p className="gameMode">{gameMode}</p> in 6 Tries.
       </h3>
-      <ul>
-        <li>Each guess must be a valid {wordLength}-word</li>
-        <li>
-          The colour of the tiles will change to show how close your guess was
-          to the word
-        </li>
-      </ul>
+        <p>📘 Each guess must be a valid {wordLength}-letter word</p>
+        <p>☑️ The colour of the tiles indicate the correctness of your guess ⬜️ 🟨 🟩
+        </p>
       <hr />
       <h3>Choose Your Game Mode.</h3>
       <p>
         From the drop down menu select the Game Mode you would like to play:
       </p>
       <ul>
-        <li>Wordl: a 4-letter word solution</li>
-        <li>Wordle: a 5-letter word solution</li>
-        <li>Wordlee: a 6-letter word solution</li>
+        <p>4️⃣ Wordl: a 4-letter word solution</p>
+        <p>5️⃣ Wordle: a 5-letter word solution</p>
+        <p>6️⃣ Wordlee: a 6-letter word solution</p>
       </ul>
       <hr />
-      <h3>Run the Solving Bot.</h3>
-      <p>Select the "Solve" bar to see the solving algorithms in action.</p>
-      <AlgorithmList />
+      <h3>Upcoming Features.</h3>
+      <p>📱 Mobile optimisation</p>
+      <p>🤖 Live solving functionality - watch how advanced solving algorithms strategise to select words and uncover the solution</p>
     </div>
   );
-};
-
-const AlgorithmList = () => {
-  <ul>
-    <li>Algo 1: desc... </li>
-    <li>Algo 2: desc... </li>
-    <li>Algo 3: desc... </li>
-  </ul>;
 };
 
 export default HelperModal;

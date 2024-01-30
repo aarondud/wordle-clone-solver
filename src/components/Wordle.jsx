@@ -3,7 +3,7 @@ import Grid from "./Body/Grid";
 import Keyboard from "./Keyboard/Keyboard";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { GameModeContext } from "../contexts/GameModeContext";
-import SolverButton from "./SolverButton";
+// import SolverButton from "./SolverButton";
 
 const Wordle = ({ updateModalType, setShowModal }) => {
   const { darkTheme } = useContext(ThemeContext);
@@ -38,7 +38,7 @@ const Wordle = ({ updateModalType, setShowModal }) => {
     <div className={`wordle ${darkTheme ? "dark" : ""}`}>
       <Grid />
       <Keyboard />
-      <SolverButton />
+      {/* <SolverButton /> */}
     </div>
   );
 };

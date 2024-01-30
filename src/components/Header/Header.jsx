@@ -24,7 +24,7 @@ export default function Header({ setShowModal, updateModalType }) {
     },
     {
       icon: <GitHub />,
-      link: "https://github.com/aarondud/wordle_clone_solver",
+      link: "https://github.com/aarondud/wordle-clone-solver",
     },
     {
       icon: <LinkedIn />,
