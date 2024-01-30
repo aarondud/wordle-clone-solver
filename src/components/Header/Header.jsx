@@ -14,9 +14,7 @@ export default function Header({ setShowModal, updateModalType }) {
     {
       icon: (
         <img
-          src={`/public/${
-            darkTheme ? "memoji-icon-color" : "memoji-icon-color"
-          }.png`}
+          src={"/public/memoji-icon-color.png"}
           className="memoji-icon"
         ></img>
       ),
