@@ -12,12 +12,7 @@ export default function Header({ setShowModal, updateModalType }) {
 
   const socialLinks = [
     {
-      icon: (
-        <img
-          src={"/public/memoji-icon-color.png"}
-          className="memoji-icon"
-        ></img>
-      ),
+      icon: <img src={"/memoji-icon-color.png"} className="memoji-icon"></img>,
       link: "https://aarondudley.vercel.app",
     },
     {
