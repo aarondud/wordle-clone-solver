@@ -128,8 +128,6 @@ const GameModeProvider = ({ children }) => {
     }
 
     if (key === "Enter") {
-      console.log("am i printing during solving.......");
-      console.log("solverOn", solverOn);
       if (
         // (attemptNo < maxAttempts || solverOn) && // solverOn change here
         attemptNo < maxAttempts &&
@@ -178,11 +176,11 @@ const GameModeProvider = ({ children }) => {
   const newGame = async (newGameMode) => {
     const gameData = await fetchGameData(newGameMode);
 
-    // toggle game mdoe
-    setGameMode(newGameMode);
-
     // reset game
     resetBoard();
+
+    // toggle game mdoe
+    setGameMode(newGameMode);
 
     // switch game mode
     setWordLength(gameData.wordLength);

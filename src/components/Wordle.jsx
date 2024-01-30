@@ -7,10 +7,17 @@ import { GameModeContext } from "../contexts/GameModeContext";
 
 const Wordle = ({ updateModalType, setShowModal }) => {
   const { darkTheme } = useContext(ThemeContext);
-  const { maxAttempts, isCorrect, attemptNo, handleKeyUp, solverOn } =
+  const { maxAttempts, isCorrect, attemptNo, handleKeyUp, solverOn, solution, currentGuess, guesses } =
     useContext(GameModeContext);
 
   useEffect(() => {
+    // add event listener for keyboard input
+    window.addEventListener("keyup", handleKeyUp);
+    return () => window.removeEventListener("keyup", handleKeyUp);
+  }, [handleKeyUp]);
+
+  useEffect(() => {
+    // check if game is over
     if (solverOn) {
       if (isCorrect) {
         updateModalType("solver");
@@ -18,21 +25,21 @@ const Wordle = ({ updateModalType, setShowModal }) => {
       }
       return;
     }
-
-    window.addEventListener("keyup", handleKeyUp);
-
+    
     if (isCorrect) {
       window.removeEventListener("keyup", handleKeyUp);
       updateModalType("win");
       setShowModal(true);
+      return;
     }
+
     if (attemptNo >= maxAttempts) {
       updateModalType("lose");
       setShowModal(true);
+      return;
     }
 
-    return () => window.removeEventListener("keyup", handleKeyUp);
-  }, [handleKeyUp]);
+  }, [guesses])
 
   return (
     <div className={`wordle ${darkTheme ? "dark" : ""}`}>

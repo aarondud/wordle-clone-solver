@@ -14,14 +14,16 @@ const Modal = ({ modalType, updateModalType, setShowModal }) => {
   const [isModalVisible, setIsModalVisible] = useState(null);
 
   useEffect(() => {
+    if (!modalType) return;
+
     if (modalType === "helper") {
       setIsModalVisible(true);
-    } else if (modalType === "win") {
+    } else if (modalType === "win" && isCorrect) {
       winModalOpen();
-    } else {
+    } else if (modalType === "lose" && attemptNo >= maxAttempts){
       loseModalOpen();
     }
-  }, []);
+  }, [modalType]);
 
   const exitModal = () => {
     setIsModalVisible(false);
